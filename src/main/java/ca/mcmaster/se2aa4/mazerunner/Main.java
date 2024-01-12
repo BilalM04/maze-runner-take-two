@@ -1,8 +1,15 @@
 package ca.mcmaster.se2aa4.mazerunner;
 
+import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.CommandLineParser;
+import org.apache.commons.cli.DefaultParser;
+import org.apache.commons.cli.ParseException;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+
+import org.apache.commons.cli.Options;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -12,9 +19,14 @@ public class Main {
 
     public static void main(String[] args) {
         logger.info("** Starting Maze Runner");
+        Options options = new Options();
+        options.addOption("i", "input", true, "Strength of Player 1 in [0,100]");
+        CommandLineParser parser = new DefaultParser();
         try {
-            logger.info("**** Reading the maze from file " + args[0]);
-            BufferedReader reader = new BufferedReader(new FileReader(args[0]));
+            CommandLine cmd = parser.parse(options, args);
+            String input_file = cmd.getOptionValue("i");
+            logger.info("**** Reading the maze from file " + input_file);
+            BufferedReader reader = new BufferedReader(new FileReader(input_file));
             String line;
             while ((line = reader.readLine()) != null) {
                 for (int idx = 0; idx < line.length(); idx++) {
