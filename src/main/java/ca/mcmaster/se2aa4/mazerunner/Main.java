@@ -20,28 +20,31 @@ public class Main {
     public static void main(String[] args) {
         logger.info("** Starting Maze Runner");
         Options options = new Options();
-        options.addOption("i", "input", true, "Strength of Player 1 in [0,100]");
+        options.addOption("i", "input", true, "maze input text file");
         CommandLineParser parser = new DefaultParser();
+        Maze maze = new Maze();
         try {
             CommandLine cmd = parser.parse(options, args);
             String input_file = cmd.getOptionValue("i");
             logger.info("**** Reading the maze from file " + input_file);
-            BufferedReader reader = new BufferedReader(new FileReader(input_file));
-            String line;
-            while ((line = reader.readLine()) != null) {
-                for (int idx = 0; idx < line.length(); idx++) {
-                    if (line.charAt(idx) == '#') {
-                        logger.info("WALL ");
-                    } else if (line.charAt(idx) == ' ') {
-                        logger.info("PASS ");
-                    }
-                }
-                logger.info(System.lineSeparator());
-            }
+            maze.setMaze(input_file);
+            // BufferedReader reader = new BufferedReader(new FileReader(input_file));
+            // String line;
+            // while ((line = reader.readLine()) != null) {
+            //     for (int idx = 0; idx < line.length(); idx++) {
+            //         if (line.charAt(idx) == '#') {
+            //             logger.info("WALL ");
+            //         } else if (line.charAt(idx) == ' ') {
+            //             logger.info("PASS ");
+            //         }
+            //     }
+            //     logger.info(System.lineSeparator());
+            // }
         } catch(Exception e) {
             logger.error("/!\\ An error has occured /!\\");
         }
         logger.info("**** Computing path");
+        maze.findPath();
         logger.info("PATH NOT COMPUTED");
         logger.info("** End of MazeRunner");
     }
