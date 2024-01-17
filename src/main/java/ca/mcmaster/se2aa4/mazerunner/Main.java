@@ -19,38 +19,19 @@ public class Main {
 
     public static void main(String[] args) {
         logger.info("** Starting Maze Runner");
-        Options options = new Options();
-        options.addOption("i", "input", true, "maze input text file");
-        options.addOption("p", "path", false, "maze input text file");
-        CommandLineParser parser = new DefaultParser();
+        Configuration config = Configuration.load(args);
         try {
-            CommandLine cmd = parser.parse(options, args);
-            String input_file = cmd.getOptionValue("i");
-            logger.info("**** Reading the maze from file " + input_file);
-            Maze maze = new Maze(input_file);
-            if (cmd.hasOption("p")) {
-                String input_path = cmd.getOptionValue("p");
+            Maze maze = new Maze(config.FILE_PATH());
+            if (config.INPUT_PATH() == null) {
                 logger.info("**** Verifying path");
-                maze.verifyPath(input_path);
+                boolean valid = maze.verifyPath(config.INPUT_PATH());
                 logger.info("PATH NOT VERIFIED");
             } else {
                 logger.info("**** Computing path");
-                maze.findPath();
+                Path factoried_path = maze.findPath();
                 logger.info("PATH NOT COMPUTED");
             }
             logger.info("** End of MazeRunner");
-            // BufferedReader reader = new BufferedReader(new FileReader(input_file));
-            // String line;
-            // while ((line = reader.readLine()) != null) {
-            //     for (int idx = 0; idx < line.length(); idx++) {
-            //         if (line.charAt(idx) == '#') {
-            //             logger.info("WALL ");
-            //         } else if (line.charAt(idx) == ' ') {
-            //             logger.info("PASS ");
-            //         }
-            //     }
-            //     logger.info(System.lineSeparator());
-            // }
         } catch(Exception e) {
             logger.error("/!\\ An error has occured /!\\");
         }

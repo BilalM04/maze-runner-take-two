@@ -10,7 +10,7 @@ public class Maze {
         logger.info("Maze Constructor");
     }
 
-    public String findPath() {
+    public Path findPath() {
         return null;
     }
 
