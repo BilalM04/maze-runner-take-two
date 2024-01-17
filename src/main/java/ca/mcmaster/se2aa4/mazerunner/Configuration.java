@@ -18,7 +18,7 @@ public record Configuration(String FILE_PATH, String INPUT_PATH) {
 
         Options options = new Options();
         options.addOption("i", "input", true, "maze input text file");
-        options.addOption("p", "path", false, "maze input text file");
+        options.addOption("p", "path", true, "maze input text file");
         CommandLineParser parser = new DefaultParser();
         try {
             CommandLine cmd = parser.parse(options, args);
