@@ -19,33 +19,22 @@ public class Main {
 
     public static void main(String[] args) {
         logger.info("** Starting Maze Runner");
-        Options options = new Options();
-        options.addOption("i", "input", true, "maze input text file");
-        CommandLineParser parser = new DefaultParser();
-        Maze maze = new Maze();
+        Configuration config = Configuration.load(args);
         try {
-            CommandLine cmd = parser.parse(options, args);
-            String input_file = cmd.getOptionValue("i");
-            logger.info("**** Reading the maze from file " + input_file);
-            maze.setMaze(input_file);
-            // BufferedReader reader = new BufferedReader(new FileReader(input_file));
-            // String line;
-            // while ((line = reader.readLine()) != null) {
-            //     for (int idx = 0; idx < line.length(); idx++) {
-            //         if (line.charAt(idx) == '#') {
-            //             logger.info("WALL ");
-            //         } else if (line.charAt(idx) == ' ') {
-            //             logger.info("PASS ");
-            //         }
-            //     }
-            //     logger.info(System.lineSeparator());
-            // }
+            Maze maze = new Maze(config.FILE_PATH());
+            Explorer maze_explorer = new Explorer(maze);
+            if (config.INPUT_PATH() != null) {
+                logger.info("**** Verifying path");
+                boolean isValid = maze_explorer.verifyPath(config.INPUT_PATH());
+                logger.info("PATH NOT VERIFIED");
+            } else {
+                logger.info("**** Computing path");
+                Path factorized_path = maze_explorer.findPath();
+                logger.info("PATH NOT COMPUTED");
+            }
+            logger.info("** End of MazeRunner");
         } catch(Exception e) {
             logger.error("/!\\ An error has occured /!\\");
         }
-        logger.info("**** Computing path");
-        maze.findPath();
-        logger.info("PATH NOT COMPUTED");
-        logger.info("** End of MazeRunner");
     }
 }
