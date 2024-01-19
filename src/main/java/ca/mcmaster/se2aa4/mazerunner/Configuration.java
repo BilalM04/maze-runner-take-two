@@ -14,11 +14,9 @@ public record Configuration(String FILE_PATH, String INPUT_PATH) {
     /* POTENTIALLY IMPLEMENT EXCEPTION LOGIC */
 
     public static Configuration load(String[] args) {
-        /* IMPLEMENT LOGIC TO PARSE COMMAND LINE AND STORE INPUTS */
-
         Options options = new Options();
-        options.addOption("i", "input", true, "maze input text file");
-        options.addOption("p", "path", true, "maze input text file");
+        options.addOption("i", "input", true, "Maze text file");
+        options.addOption("p", "path", true, "Maze path for verification");
         CommandLineParser parser = new DefaultParser();
         try {
             CommandLine cmd = parser.parse(options, args);

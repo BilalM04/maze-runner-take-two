@@ -15,11 +15,13 @@ public class Path {
         /* IMPLEMENT LOGIC TO ADD INSTRUCTION */
     }
 
-    public void printCanonicalPath() {
-        /* IMPLEMENT LOGIC TO PRINT CANONICAL PATH */
+    public String getCanonicalPath() {
+        /* IMPLEMENT LOGIC TO RETURN CANONICAL PATH */
+        return "";
     }
 
-    public void printFactorizedPath() {
-         /* IMPLEMENT LOGIC TO PRINT FACTORIZED PATH */
+    public String getFactorizedPath() {
+         /* IMPLEMENT LOGIC TO RETURN FACTORIZED PATH */
+         return "";
     }
 }

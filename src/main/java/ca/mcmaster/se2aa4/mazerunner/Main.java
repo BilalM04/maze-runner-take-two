@@ -22,13 +22,14 @@ public class Main {
         Configuration config = Configuration.load(args);
         try {
             Maze maze = new Maze(config.FILE_PATH());
+            Explorer maze_explorer = new Explorer(maze);
             if (config.INPUT_PATH() != null) {
                 logger.info("**** Verifying path");
-                boolean valid = maze.verifyPath(config.INPUT_PATH());
+                boolean isValid = maze_explorer.verifyPath(config.INPUT_PATH());
                 logger.info("PATH NOT VERIFIED");
             } else {
                 logger.info("**** Computing path");
-                Path factorized_path = maze.findPath();
+                Path factorized_path = maze_explorer.findPath();
                 logger.info("PATH NOT COMPUTED");
             }
             logger.info("** End of MazeRunner");
