@@ -10,11 +10,13 @@ public class Explorer {
     public Explorer(Configuration config) throws IOException {
         this.maze = new Maze(config);
         this.loc = maze.findEntry();
+        this.path = new Path();
     }
 
     public String getPath() {
-        Location entry = maze.findExit();
-        return entry.getRow() + ", " + entry.getColumn() + ", " + entry.getDirection();
+        path.addInstruction(Instruction.F);
+        path.addInstruction(Instruction.R);
+        return path.getCanonicalPath();
     }
 
     public Path findPath() {
