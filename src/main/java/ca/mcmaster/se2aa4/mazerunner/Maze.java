@@ -76,6 +76,11 @@ public class Maze {
     }
 
     public Location findExit() {
-        return new Location(5, 7, Direction.EAST);
+        for (int row = 0; row < config.MAZE_HEIGHT(); row++) {
+            if (grid[row][config.MAZE_WIDTH()-1] == Tile.EMPTY) {
+                return new Location(row, config.MAZE_WIDTH()-1, Direction.EAST);
+            }
+        }
+        throw new IllegalStateException("No exit point found in the maze");
     }
 }
