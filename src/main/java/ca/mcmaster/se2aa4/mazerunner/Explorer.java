@@ -13,7 +13,7 @@ public class Explorer {
     }
 
     public String getPath() {
-        Location entry = maze.findEntry();
+        Location entry = maze.findExit();
         return entry.getRow() + ", " + entry.getColumn() + ", " + entry.getDirection();
     }
 
