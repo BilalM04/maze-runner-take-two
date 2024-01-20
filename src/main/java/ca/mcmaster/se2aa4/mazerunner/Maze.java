@@ -59,7 +59,7 @@ public class Maze {
     }
 
     public Tile getTile(Location loc) {
-        return grid[loc.row()][loc.column()];
+        return null;
     }
 
     public HashMap<Direction, Tile> getNeighbours(Location loc) {
