@@ -21,10 +21,10 @@ public class Main {
         logger.info("** Starting Maze Runner");
         Configuration config = Configuration.load(args);
         try {
-            Explorer maze_explorer = new Explorer(config.FILE_PATH());
+            Explorer maze_explorer = new Explorer(config);
             if (config.INPUT_PATH() != null) {
                 logger.info("**** Verifying path");
-                boolean isValid = maze_explorer.verifyPath(config.INPUT_PATH());
+                boolean isValid = maze_explorer.verifyPath();
                 logger.info("PATH NOT VERIFIED");
             } else {
                 logger.info("**** Computing path");
