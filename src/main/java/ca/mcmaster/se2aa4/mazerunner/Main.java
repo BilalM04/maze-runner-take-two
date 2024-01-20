@@ -28,7 +28,7 @@ public class Main {
                 logger.info("PATH NOT VERIFIED");
             } else {
                 logger.info("**** Computing path");
-                String factorized_path = maze_explorer.findPath();
+                String factorized_path = maze_explorer.getPath();
                 logger.info(factorized_path);
             }
             logger.info("** End of MazeRunner");
