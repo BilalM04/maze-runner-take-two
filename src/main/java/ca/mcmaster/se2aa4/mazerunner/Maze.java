@@ -67,7 +67,12 @@ public class Maze {
     }
 
     public Location findEntry() {
-        return new Location(1, 0, Direction.EAST);
+        for (int row = 0; row < config.MAZE_HEIGHT(); row++) {
+            if (grid[row][0] == Tile.EMPTY) {
+                return new Location(row, 0, Direction.EAST);
+            }
+        }
+        throw new IllegalStateException("No entry point found in the maze");
     }
 
     public Location findExit() {

@@ -12,7 +12,12 @@ public class Explorer {
         this.loc = maze.findEntry();
     }
 
-    public String findPath() {
+    public String getPath() {
+        Location entry = maze.findEntry();
+        return entry.getRow() + ", " + entry.getColumn() + ", " + entry.getDirection();
+    }
+
+    public Path findPath() {
         // StringBuilder str = new StringBuilder();
         // Location start = maze.findEntry();
         // Location end = maze.findExit();
@@ -40,7 +45,23 @@ public class Explorer {
         // }
 
         // return str.toString();
-        return "";
+        return null;
+    }
+
+    private boolean goRight() {
+        return false;
+    }
+
+    private boolean goLeft() {
+        return false;
+    }
+
+    private boolean goForward() {
+        return false;
+    }
+
+    private boolean goBackward() {
+        return false;
     }
 
     public boolean verifyPath(){
