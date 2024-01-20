@@ -53,7 +53,7 @@ public class Maze {
         return null;
     }
 
-    public HashMap<String, Tile> getNeighbours(Location loc) {
+    public HashMap<Direction, Tile> getNeighbours(Location loc) {
         return null;
     }
 
