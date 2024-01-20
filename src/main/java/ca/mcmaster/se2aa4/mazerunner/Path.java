@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Path {
-    List<String> canonical_path;
+    List<Instruction> canonical_path;
     List<String> factorized_path;
 
     public Path() {
@@ -12,13 +12,16 @@ public class Path {
         this.factorized_path = new ArrayList<>();
     }
 
-    public void addInstruction(char instruction) {
-        /* IMPLEMENT LOGIC TO ADD INSTRUCTION */
+    public void addInstruction(Instruction instruction) {
+        canonical_path.add(instruction);
     }
 
     public String getCanonicalPath() {
-        /* IMPLEMENT LOGIC TO RETURN CANONICAL PATH */
-        return "";
+        StringBuilder canonical_path_str = new StringBuilder();
+        for (Instruction inst : canonical_path) {
+            canonical_path_str.append(inst.toString());
+        }
+        return canonical_path_str.toString();
     }
 
     public String getFactorizedPath() {
