@@ -8,4 +8,6 @@ public enum Tile {
     Tile(char symbol) { 
         this.symbol = symbol; 
     }
+
+    public String toString() { return "" + symbol; }
 }

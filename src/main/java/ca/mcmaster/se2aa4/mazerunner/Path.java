@@ -1,10 +1,11 @@
 package ca.mcmaster.se2aa4.mazerunner;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Path {
-    ArrayList<String> canonical_path;
-    ArrayList<String> factorized_path;
+    List<String> canonical_path;
+    List<String> factorized_path;
 
     public Path() {
         this.canonical_path = new ArrayList<>();
