@@ -20,7 +20,7 @@ public class Maze {
         Reader file_reader = new FileReader(maze_input_file);
         BufferedReader buffered_reader = new BufferedReader(file_reader);
 
-        grid = new ArrayList<>(); // array list to store rows
+        grid = new ArrayList<>(); // array list to store rows of maze
         String maze_row = buffered_reader.readLine();
         int maze_width = maze_row.length();
         int grid_row_index = 0;
