@@ -21,20 +21,19 @@ public class Main {
         logger.info("** Starting Maze Runner");
         Configuration config = Configuration.load(args);
         try {
-            Maze maze = new Maze(config.FILE_PATH());
-            Explorer maze_explorer = new Explorer(maze);
+            Explorer maze_explorer = new Explorer(config.FILE_PATH());
             if (config.INPUT_PATH() != null) {
                 logger.info("**** Verifying path");
                 boolean isValid = maze_explorer.verifyPath(config.INPUT_PATH());
                 logger.info("PATH NOT VERIFIED");
             } else {
                 logger.info("**** Computing path");
-                Path factorized_path = maze_explorer.findPath();
+                String factorized_path = maze_explorer.findPath();
                 logger.info("PATH NOT COMPUTED");
             }
             logger.info("** End of MazeRunner");
         } catch(Exception e) {
-            logger.error("/!\\ An error has occured /!\\");
+            logger.error(e);
         }
     }
 }

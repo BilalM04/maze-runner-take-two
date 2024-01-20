@@ -1,15 +1,18 @@
 package ca.mcmaster.se2aa4.mazerunner;
 
+import java.io.IOException;
+
 public class Explorer {
     Maze maze;
     Location loc;
+    Path path;
 
-    public Explorer(Maze maze) {
-        this.maze = maze;
+    public Explorer(String file_path) throws IOException {
+        this.maze = new Maze(file_path);
     }
 
-    public Path findPath() {
-        return null;
+    public String findPath() {
+        return "";
     }
 
     public boolean verifyPath(String path){
