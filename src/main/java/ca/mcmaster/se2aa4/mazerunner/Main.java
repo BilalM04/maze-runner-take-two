@@ -29,7 +29,7 @@ public class Main {
             } else {
                 logger.info("**** Computing path");
                 String factorized_path = maze_explorer.findPath();
-                logger.info("PATH NOT COMPUTED");
+                logger.info(factorized_path);
             }
             logger.info("** End of MazeRunner");
         } catch(Exception e) {

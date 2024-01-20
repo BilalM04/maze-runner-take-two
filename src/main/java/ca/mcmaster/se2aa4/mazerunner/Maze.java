@@ -28,15 +28,19 @@ public class Maze {
             char[] maze_row_arr = maze_row.toCharArray();
 
             for (int i = 0; i < config.MAZE_WIDTH(); i++) {
-                switch (maze_row_arr[i]) {
-                    case '#':
-                        grid[grid_row_index][i] = Tile.WALL;
-                        break;
-                    case ' ':
-                        grid[grid_row_index][i]  = Tile.EMPTY;
-                        break;
-                    default:
-                        throw new IllegalArgumentException("Invalid character in maze file: " + maze_row_arr[i]);
+                if (i >= maze_row_arr.length) {
+                    grid[grid_row_index][i] = Tile.EMPTY;
+                } else {
+                    switch (maze_row_arr[i]) {
+                        case '#':
+                            grid[grid_row_index][i] = Tile.WALL;
+                            break;
+                        case ' ':
+                            grid[grid_row_index][i]  = Tile.EMPTY;
+                            break;
+                        default:
+                            throw new IllegalArgumentException("Invalid character in maze file: " + maze_row_arr[i]);
+                    }
                 }
             }
 
