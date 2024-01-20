@@ -11,10 +11,12 @@ import org.apache.logging.log4j.Logger;
 
 public class Maze {
     private static final Logger logger = LogManager.getLogger();
-    private static Tile[][] grid;
+    public Tile[][] grid;
+    private Configuration config;
 
     public Maze (Configuration config) throws IOException {
         logger.info("Maze Constructor");
+        this.config = config;
         Reader file_reader = new FileReader(config.MAZE_FILE());
         BufferedReader buffered_reader = new BufferedReader(file_reader);
 
@@ -53,7 +55,7 @@ public class Maze {
     }
 
     public Tile getTile(Location loc) {
-        return grid[loc.x()][loc.y()];
+        return grid[loc.row()][loc.column()];
     }
 
     public HashMap<Direction, Tile> getNeighbours(Location loc) {
@@ -61,10 +63,10 @@ public class Maze {
     }
 
     public Location findEntry() {
-        return null;
+        return new Location(1, 0, Direction.EAST);
     }
 
     public Location findExit() {
-        return null;
+        return new Location(5, 7, Direction.EAST);
     }
 }
