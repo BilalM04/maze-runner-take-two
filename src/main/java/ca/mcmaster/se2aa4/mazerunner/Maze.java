@@ -4,38 +4,34 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class Maze {
     private static final Logger logger = LogManager.getLogger();
-    private static List<Tile[]> grid;
+    private static Tile[][] grid;
 
-    public Maze (String maze_input_file) throws IOException {
+    public Maze (Configuration config) throws IOException {
         logger.info("Maze Constructor");
-        Reader file_reader = new FileReader(maze_input_file);
+        Reader file_reader = new FileReader(config.MAZE_FILE());
         BufferedReader buffered_reader = new BufferedReader(file_reader);
 
-        grid = new ArrayList<>(); // array list to store rows of maze
+        grid = new Tile[config.MAZE_HEIGHT()][config.MAZE_WIDTH()];
         String maze_row = buffered_reader.readLine();
-        int maze_width = maze_row.length();
         int grid_row_index = 0;
 
         while (maze_row != null) {
             char[] maze_row_arr = maze_row.toCharArray();
-            grid.add(new Tile[maze_width]);
 
-            for (int i = 0; i < maze_row_arr.length; i++) {
+            for (int i = 0; i < config.MAZE_WIDTH(); i++) {
                 switch (maze_row_arr[i]) {
                     case '#':
-                        grid.get(grid_row_index)[i] = Tile.WALL;
+                        grid[grid_row_index][i] = Tile.WALL;
                         break;
                     case ' ':
-                        grid.get(grid_row_index)[i] = Tile.EMPTY;
+                        grid[grid_row_index][i]  = Tile.EMPTY;
                         break;
                     default:
                         throw new IllegalArgumentException("Invalid character in maze file: " + maze_row_arr[i]);
@@ -46,11 +42,18 @@ public class Maze {
             maze_row = buffered_reader.readLine();
         }
 
+        // for (Tile[] row : grid) {
+        //     for (Tile tile : row) {
+        //         System.out.print(tile.toString());
+        //     }
+        //     System.out.println();
+        // }
+
         buffered_reader.close();
     }
 
     public Tile getTile(Location loc) {
-        return null;
+        return grid[loc.x()][loc.y()];
     }
 
     public HashMap<Direction, Tile> getNeighbours(Location loc) {

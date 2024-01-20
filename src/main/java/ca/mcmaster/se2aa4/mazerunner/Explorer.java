@@ -7,15 +7,15 @@ public class Explorer {
     Location loc;
     Path path;
 
-    public Explorer(String file_path) throws IOException {
-        this.maze = new Maze(file_path);
+    public Explorer(Configuration config) throws IOException {
+        this.maze = new Maze(config);
     }
 
     public String findPath() {
         return "";
     }
 
-    public boolean verifyPath(String path){
+    public boolean verifyPath(){
         return false;
     }
 }
