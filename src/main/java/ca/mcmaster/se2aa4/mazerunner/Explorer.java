@@ -1,69 +1,107 @@
 package ca.mcmaster.se2aa4.mazerunner;
 
 import java.io.IOException;
+import java.util.Map;
 
 public class Explorer {
-    Maze maze;
-    Location loc;
-    Path path;
+    private Maze maze;
+    private Location loc;
 
     public Explorer(Configuration config) throws IOException {
         this.maze = new Maze(config);
         this.loc = maze.findEntry();
-        this.path = new Path();
     }
 
     public String getPath() {
-        path.addInstruction(Instruction.F);
-        path.addInstruction(Instruction.R);
+        Path path = findPath();
         return path.getCanonicalPath();
     }
 
-    public Path findPath() {
-        // StringBuilder str = new StringBuilder();
-        // Location start = maze.findEntry();
-        // Location end = maze.findExit();
-        // int row = start.row();
-        // int col = start.column();
-        // int end_row = end.row();
-        // int end_col = end.column();
-        // str.append("R");
-        // col++;
+    private Path findPath() {
+        Path path = new Path();
+        Location exit = maze.findExit();
 
-        // while (row != end_row || col != end_col) {
-        //     if (maze.grid[row+1][col] == Tile.EMPTY) {
-        //         str.append("D");
-        //         row++;
-        //     } else if (maze.grid[row][col+1] == Tile.EMPTY) {
-        //         str.append("R");
-        //         col++;
-        //     } else if (maze.grid[row-1][col] == Tile.EMPTY) {
-        //         str.append("U");
-        //         row--;
-        //     } else {
-        //         str.append("L");
-        //         col--;
-        //     }
-        // }
+        while (!this.loc.equals(exit)) {
+            if (this.goRight()) {
+                path.addInstruction(Instruction.R);
+                path.addInstruction(Instruction.F);
+            } else if (this.goForward()) {
+                path.addInstruction(Instruction.F);
+            } else if (this.goLeft()) {
+                path.addInstruction(Instruction.L);
+                path.addInstruction(Instruction.F);
+            } else if (this.goBackward()) {
+                path.addInstruction(Instruction.R);
+                path.addInstruction(Instruction.R);
+                path.addInstruction(Instruction.F);
+            }
+        }
 
-        // return str.toString();
-        return null;
+        return path;
     }
 
     private boolean goRight() {
+        Map<Direction, Tile> neighbours = maze.getNeighbours(loc);
+        Direction right = this.loc.getDirection().getRightDirection();
+
+        if (neighbours.get(right) == Tile.EMPTY) {
+            loc.setDirection(right);
+            this.changePosition(right);
+            return true;
+        }
+
         return false;
     }
 
     private boolean goLeft() {
+        Map<Direction, Tile> neighbours = maze.getNeighbours(loc);
+        Direction left = this.loc.getDirection().getLeftDirection();
+
+        if (neighbours.get(left) == Tile.EMPTY) {
+            loc.setDirection(left);
+            this.changePosition(left);
+            return true;
+        }
+
         return false;
     }
 
     private boolean goForward() {
+        Map<Direction, Tile> neighbours = maze.getNeighbours(loc);
+        Direction dir = loc.getDirection();
+
+        if (neighbours.get(dir) == Tile.EMPTY) {
+            loc.setDirection(dir);
+            this.changePosition(dir);
+            return true;
+        }
+
         return false;
     }
 
     private boolean goBackward() {
+        Map<Direction, Tile> neighbours = maze.getNeighbours(loc);
+        Direction back = this.loc.getDirection().getOppositeDirection();
+
+        if (neighbours.get(back) == Tile.EMPTY) {
+            loc.setDirection(back);
+            this.changePosition(back);
+            return true;
+        }
+
         return false;
+    }
+
+    private void changePosition(Direction dir) {
+        if (dir == Direction.NORTH) {
+            loc.setRow(loc.getRow() - 1);
+        } else if (dir == Direction.EAST) {
+            loc.setColumn(loc.getColumn() + 1);
+        } else if (dir == Direction.SOUTH) {
+            loc.setRow(loc.getRow() + 1);
+        } else if (dir == Direction.WEST) {
+            loc.setColumn(loc.getColumn() - 1);
+        }
     }
 
     public boolean verifyPath(){
