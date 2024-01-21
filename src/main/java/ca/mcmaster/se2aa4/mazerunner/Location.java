@@ -12,10 +12,16 @@ public class Location {
     }
 
     public void setRow(int row) {
+        if (row < 0) {
+            throw new IllegalArgumentException();
+        }
         this.row = row;
     }
 
     public void setColumn(int column) {
+        if (column < 0) {
+            throw new IllegalArgumentException();
+        }
         this.column = column;
     }
 
@@ -33,5 +39,12 @@ public class Location {
 
     public Direction getDirection() {
         return direction;
+    }
+
+    public boolean equals(Location loc) {
+        if (this.row == loc.row && this.column == loc.column && this.direction == loc.direction) {
+            return true;
+        }
+        return false;
     }
 }

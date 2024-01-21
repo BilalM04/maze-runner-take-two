@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
 import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -59,11 +60,39 @@ public class Maze {
     }
 
     public Tile getTile(Location loc) {
-        return null;
+        return grid[loc.getRow()][loc.getColumn()];
     }
 
-    public HashMap<Direction, Tile> getNeighbours(Location loc) {
-        return null;
+    public Map<Direction, Tile> getNeighbours(Location loc) {
+        Map<Direction, Tile> neighbours = new HashMap<>();
+        int row = loc.getRow();
+        int col = loc.getColumn();
+        
+        if (row - 1 < 0) {
+            neighbours.put(Direction.NORTH, null);
+        } else {
+            neighbours.put(Direction.NORTH, grid[row-1][col]);
+        }
+
+        if (row + 1 >= config.MAZE_HEIGHT()) {
+            neighbours.put(Direction.SOUTH, null);
+        } else {
+            neighbours.put(Direction.SOUTH, grid[row+1][col]);
+        }
+
+        if (col - 1 < 0) {
+            neighbours.put(Direction.WEST, null);
+        } else {
+            neighbours.put(Direction.WEST, grid[row][col-1]);
+        }
+
+        if (col + 1 >= config.MAZE_WIDTH()) {
+            neighbours.put(Direction.EAST, null);
+        } else {
+            neighbours.put(Direction.EAST, grid[row][col+1]);
+        }
+
+        return neighbours;
     }
 
     public Location findEntry() {
