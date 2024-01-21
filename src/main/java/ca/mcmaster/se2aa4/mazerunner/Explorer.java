@@ -14,7 +14,7 @@ public class Explorer {
 
     public String getPath() {
         Path path = findPath();
-        return path.getCanonicalPath();
+        return path.getFactorizedPath();
     }
 
     private Path findPath() {
