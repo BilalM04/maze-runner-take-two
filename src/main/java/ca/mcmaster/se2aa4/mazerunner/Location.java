@@ -4,23 +4,25 @@ public class Location {
     private int row;
     private int column;
     private Direction direction;
+    private Configuration config;
 
-    public Location(int row, int column, Direction dir) {
+    public Location(int row, int column, Direction dir, Configuration config) {
         this.row = row;
         this.column = column;
         this.direction = dir;
+        this.config = config;
     }
 
     public void setRow(int row) {
-        if (row < 0) {
-            throw new IllegalArgumentException();
+        if (row < 0 || row >= config.MAZE_HEIGHT()) {
+            throw new IllegalArgumentException("Row out of bounds of maze: " + row);
         }
         this.row = row;
     }
 
     public void setColumn(int column) {
-        if (column < 0) {
-            throw new IllegalArgumentException();
+        if (column < 0 || column >= config.MAZE_WIDTH()) {
+            throw new IllegalArgumentException("Column out of bounds of maze: " + column);
         }
         this.column = column;
     }
