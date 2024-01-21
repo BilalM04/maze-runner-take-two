@@ -9,5 +9,7 @@ public enum Instruction {
         this.symbol = symbol; 
     }
 
-    public String toString() { return "" + symbol; }
+    public String toString() { 
+        return "" + symbol; 
+    }
 }
