@@ -2,14 +2,16 @@ package ca.mcmaster.se2aa4.mazerunner;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Stack;
 
 public class Path {
     List<Instruction> canonical_path;
-    List<String> factorized_path;
+    Stack<Map.Entry<Integer, Instruction>> factorized_path;
 
     public Path() {
         this.canonical_path = new ArrayList<>();
-        this.factorized_path = new ArrayList<>();
+        this.factorized_path = new Stack<>();
     }
 
     public void addInstruction(Instruction instruction) {
@@ -25,7 +27,21 @@ public class Path {
     }
 
     public String getFactorizedPath() {
-         /* IMPLEMENT LOGIC TO RETURN FACTORIZED PATH */
-         return "";
+         StringBuilder factorized_path_str = new StringBuilder();
+         for (int i = 0; i < canonical_path.size(); i++) {
+            Instruction current_instruction = canonical_path.get(i);
+            int count = 0;
+            while (i < canonical_path.size() && current_instruction.toString().equals(canonical_path.get(i).toString())) {
+                i++;
+                count++;
+            }
+            i--;
+            if (count == 1) {
+                factorized_path_str.append(current_instruction.toString() + " ");
+            } else {
+                factorized_path_str.append(count + "" + current_instruction.toString() + " ");
+            }
+         }
+         return factorized_path_str.toString();
     }
 }

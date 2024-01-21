@@ -7,16 +7,11 @@ import java.io.Reader;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 public class Maze {
-    private static final Logger logger = LogManager.getLogger();
-    public Tile[][] grid;
+    private Tile[][] grid;
     private Configuration config;
 
     public Maze (Configuration config) throws IOException {
-        logger.info("Maze Constructor");
         this.config = config;
         Reader file_reader = new FileReader(config.MAZE_FILE());
         BufferedReader buffered_reader = new BufferedReader(file_reader);
@@ -50,10 +45,6 @@ public class Maze {
         }
 
         buffered_reader.close();
-    }
-
-    public Tile getTile(Location loc) {
-        return grid[loc.getRow()][loc.getColumn()];
     }
 
     public Map<Direction, Tile> getNeighbours(Location loc) {
