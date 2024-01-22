@@ -19,8 +19,10 @@ public class Main {
                 logger.info("PATH NOT VERIFIED");
             } else {
                 logger.info("**** Computing path");
-                String factorized_path = maze_explorer.getPath();
+                String factorized_path = maze_explorer.getWestToEast(true);
+                String path = maze_explorer.getEastToWest(true);
                 logger.info(factorized_path);
+                logger.info(path);
             }
             logger.info("** End of MazeRunner");
         } catch(Exception e) {

@@ -9,17 +9,39 @@ public class Explorer {
 
     public Explorer(Configuration config) throws IOException {
         this.maze = new Maze(config);
-        this.loc = maze.findEntry();
     }
 
-    public String getPath() {
-        Path path = findPath();
-        return path.getCanonicalPath();
+    public String getEastToWest(boolean factorized) {
+        Location start = maze.findEastEntry();
+        start.setDirection(Direction.WEST);
+        Location end = maze.findWestEntry();
+        end.setDirection(Direction.WEST);
+        Path path = findPath(start, end);
+
+        if (factorized) {
+            return path.getFactorizedPath();
+        } else {
+            return path.getCanonicalPath();
+        }
     }
 
-    private Path findPath() {
+    public String getWestToEast(boolean factorized) {
+        Location start = maze.findWestEntry();
+        start.setDirection(Direction.EAST);
+        Location end = maze.findEastEntry();
+        end.setDirection(Direction.EAST);
+        Path path = findPath(start, end);
+
+        if (factorized) {
+            return path.getFactorizedPath();
+        } else {
+            return path.getCanonicalPath();
+        }
+    }
+
+    private Path findPath(Location entry, Location exit) {
         Path path = new Path();
-        Location exit = maze.findExit();
+        loc = entry;
 
         while (!this.loc.equals(exit)) {
             if (this.goRight()) {
