@@ -14,7 +14,8 @@ public class Main {
             Explorer maze_explorer = new Explorer(config);
             if (config.INPUT_PATH() != null) {
                 logger.info("**** Verifying path");
-                boolean isValid = maze_explorer.verifyPath();
+                //boolean isValid = maze_explorer.verifyPath();
+                System.out.println(config.INPUT_PATH().getCanonicalPath());
                 logger.info("PATH NOT VERIFIED");
             } else {
                 logger.info("**** Computing path");

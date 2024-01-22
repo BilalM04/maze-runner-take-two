@@ -14,7 +14,7 @@ public class Explorer {
 
     public String getPath() {
         Path path = findPath();
-        return path.getFactorizedPath();
+        return path.getCanonicalPath();
     }
 
     private Path findPath() {
@@ -104,7 +104,7 @@ public class Explorer {
         }
     }
 
-    public boolean verifyPath(){
+    public boolean verifyPath(Path path){
         return false;
     }
 }
