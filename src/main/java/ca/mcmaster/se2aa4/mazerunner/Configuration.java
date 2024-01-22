@@ -12,7 +12,7 @@ import org.apache.commons.cli.Options;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public record Configuration(String MAZE_FILE, String INPUT_PATH, int MAZE_WIDTH, int MAZE_HEIGHT) {
+public record Configuration(String MAZE_FILE, Path INPUT_PATH, int MAZE_WIDTH, int MAZE_HEIGHT) {
 
     private static final Logger logger = LogManager.getLogger();
 
@@ -26,10 +26,11 @@ public record Configuration(String MAZE_FILE, String INPUT_PATH, int MAZE_WIDTH,
         try {
             CommandLine cmd = parser.parse(options, args);
             String MAZE_FILE = cmd.getOptionValue("i");
-            String INPUT_PATH = null;
+            Path INPUT_PATH = null;
             logger.info("**** Reading the maze from file " + MAZE_FILE);
             if (cmd.hasOption("p")) {
-                INPUT_PATH = cmd.getOptionValue("p");
+                String string_path = cmd.getOptionValue("p");
+                INPUT_PATH = storePath(string_path);
             }
             int MAZE_HEIGHT = mazeHeight(MAZE_FILE);
             int MAZE_WIDTH = mazeWidth(MAZE_FILE);
@@ -60,5 +61,45 @@ public record Configuration(String MAZE_FILE, String INPUT_PATH, int MAZE_WIDTH,
 
         buffered_reader.close();
         return count;
+    }
+
+    private static Path storePath(String path) {
+        Path user_path = new Path();
+
+        for (int i = 0; i < path.length(); i++) {
+            int repeat = 1;
+            int end = i;
+
+            if (path.charAt(i) >= 48 && path.charAt(i) <= 57) {
+                end++;
+
+                while (path.charAt(end) >= 48 && path.charAt(end) <= 57) {
+                    end++;
+                }
+                
+                repeat = Integer.parseInt(path.substring(i, end));
+                i = end + 1;
+            }
+
+            for (int r = 0; r < repeat; r++) {
+                switch (path.charAt(end)) {
+                    case 'F':
+                        user_path.addInstruction(Instruction.F);
+                        break;
+                    case 'L':
+                        user_path.addInstruction(Instruction.L);
+                        break;
+                    case 'R':
+                        user_path.addInstruction(Instruction.R);
+                        break;
+                    case ' ':
+                        continue;
+                    default:
+                        throw new IllegalArgumentException("Invalid character in path: " + path.charAt(end));
+                }
+            }
+        }
+
+        return user_path;
     }
 }
