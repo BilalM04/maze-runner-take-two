@@ -79,7 +79,7 @@ public class Maze {
         return neighbours;
     }
 
-    public Location findEntry() {
+    public Location findWestEntry() {
         for (int row = 0; row < config.MAZE_HEIGHT(); row++) {
             if (grid[row][0] == Tile.EMPTY) {
                 return new Location(row, 0, Direction.EAST, config);
@@ -88,7 +88,7 @@ public class Maze {
         throw new IllegalStateException("No entry point found in the maze");
     }
 
-    public Location findExit() {
+    public Location findEastEntry() {
         for (int row = 0; row < config.MAZE_HEIGHT(); row++) {
             if (grid[row][config.MAZE_WIDTH()-1] == Tile.EMPTY) {
                 return new Location(row, config.MAZE_WIDTH()-1, Direction.EAST, config);
