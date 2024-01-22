@@ -2,20 +2,24 @@ package ca.mcmaster.se2aa4.mazerunner;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.Stack;
 
 public class Path {
-    List<Instruction> canonical_path;
-    Stack<Map.Entry<Integer, Instruction>> factorized_path;
+    private List<Instruction> canonical_path;
 
     public Path() {
         this.canonical_path = new ArrayList<>();
-        this.factorized_path = new Stack<>();
     }
 
     public void addInstruction(Instruction instruction) {
         canonical_path.add(instruction);
+    }
+
+    public Instruction getInstruction(int index) {
+        return canonical_path.get(index);
+    }
+
+    public int length() {
+        return canonical_path.size();
     }
 
     public String getCanonicalPath() {
