@@ -127,6 +127,50 @@ public class Explorer {
     }
 
     public boolean verifyPath(Path path){
-        return false;
+        return checkWestToEast(path) || checkEastToWest(path);
+    }
+
+    private boolean checkWestToEast(Path path) {
+        Location start = maze.findWestEntry();
+        start.setDirection(Direction.EAST);
+        Location end = maze.findEastEntry();
+        end.setDirection(Direction.EAST);
+        return traverseMaze(path, start, end);
+    }
+
+    private boolean checkEastToWest(Path path) {
+        Location start = maze.findEastEntry();
+        start.setDirection(Direction.WEST);
+        Location end = maze.findWestEntry();
+        end.setDirection(Direction.WEST);
+        return traverseMaze(path, start, end);
+    }
+
+    private boolean traverseMaze(Path path, Location start, Location end) {
+        loc = start;
+        boolean is_valid_instruction;
+
+        for (int i = 0; i < path.length(); i++) {
+            is_valid_instruction = true;
+            switch (path.getInstruction(i)) {
+                case Instruction.F:
+                    is_valid_instruction = goForward();
+                    break;
+                case Instruction.R:
+                    loc.setDirection(loc.getDirection().getRightDirection());
+                    break;
+                case Instruction.L:
+                    loc.setDirection(loc.getDirection().getLeftDirection());
+                    break;
+                default:
+                    throw new IllegalStateException();
+            }
+
+            if (!is_valid_instruction) {
+                return false;
+            }
+        }
+
+        return loc.equals(end);
     }
 }
