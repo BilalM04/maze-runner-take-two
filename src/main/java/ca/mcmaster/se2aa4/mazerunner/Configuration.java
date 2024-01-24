@@ -78,7 +78,7 @@ public record Configuration(String MAZE_FILE, Path INPUT_PATH, int MAZE_WIDTH, i
                 }
                 
                 repeat = Integer.parseInt(path.substring(i, end));
-                i = end + 1;
+                i = end;
             }
 
             for (int r = 0; r < repeat; r++) {

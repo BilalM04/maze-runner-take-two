@@ -85,7 +85,7 @@ public class Maze {
                 return new Location(row, 0, Direction.EAST, config);
             }
         }
-        throw new IllegalStateException("No entry point found in the maze");
+        throw new IllegalStateException("No West entry point found in the maze");
     }
 
     public Location findEastEntry() {
@@ -94,6 +94,6 @@ public class Maze {
                 return new Location(row, config.MAZE_WIDTH()-1, Direction.EAST, config);
             }
         }
-        throw new IllegalStateException("No exit point found in the maze");
+        throw new IllegalStateException("No East entry point found in the maze");
     }
 }
