@@ -11,16 +11,17 @@ public class Main {
         logger.info("** Starting Maze Runner");
         Configuration config = Configuration.load(args);
         try {
-            Explorer maze_explorer = new Explorer(config);
+            RightHand right_hand_algo = new RightHand(config);
             if (config.INPUT_PATH() != null) {
                 logger.info("**** Verifying path");
-                boolean isValid = maze_explorer.verifyPath(config.INPUT_PATH());
-                System.out.println(isValid);
+                System.out.println(config.INPUT_PATH().getCanonicalPath());
+                //boolean isValid = maze_explorer.verifyPath(config.INPUT_PATH());
+                //System.out.println(isValid);
                 logger.info("PATH NOT VERIFIED");
             } else {
                 logger.info("**** Computing path");
-                String factorized_path = maze_explorer.getWestToEast(true);
-                String path = maze_explorer.getEastToWest(true);
+                String factorized_path = right_hand_algo.getWestToEast(true);
+                String path = right_hand_algo.getEastToWest(true);
                 logger.info(factorized_path);
                 logger.info(path);
             }
