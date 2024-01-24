@@ -12,11 +12,12 @@ public class Main {
         Configuration config = Configuration.load(args);
         try {
             RightHand right_hand_algo = new RightHand(config);
+            Verifier path_verifier = new Verifier(config);
             if (config.INPUT_PATH() != null) {
                 logger.info("**** Verifying path");
                 System.out.println(config.INPUT_PATH().getCanonicalPath());
-                //boolean isValid = maze_explorer.verifyPath(config.INPUT_PATH());
-                //System.out.println(isValid);
+                boolean isValid = path_verifier.verifyPath(config.INPUT_PATH());
+                System.out.println(isValid);
                 logger.info("PATH NOT VERIFIED");
             } else {
                 logger.info("**** Computing path");

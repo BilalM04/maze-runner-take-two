@@ -43,7 +43,7 @@ public class RightHand extends MazeAlgorithm{
         Path path = new Path();
         maze_explorer.setLocation(entry);
 
-        while (!maze_explorer.getLocation().equals(exit)) {
+        while (!maze_explorer.isAt(exit)) {
             if (maze_explorer.goRight()) {
                 path.addInstruction(Instruction.R);
                 path.addInstruction(Instruction.F);

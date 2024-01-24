@@ -71,6 +71,18 @@ public class Explorer {
         return false;
     }
 
+    public void turnLeft() {
+        loc.setDirection(loc.getDirection().getLeftDirection());
+    }
+
+    public void turnRight() {
+        loc.setDirection(loc.getDirection().getRightDirection());
+    }
+
+    public boolean isAt(Location loc) {
+        return this.loc.equals(loc);
+    }
+
     public void changePosition(Direction dir) {
         if (dir == Direction.NORTH) {
             loc.setRow(loc.getRow() - 1);
@@ -81,53 +93,5 @@ public class Explorer {
         } else if (dir == Direction.WEST) {
             loc.setColumn(loc.getColumn() - 1);
         }
-    }
-
-    public boolean verifyPath(Path path){
-        return checkWestToEast(path) || checkEastToWest(path);
-    }
-
-    private boolean checkWestToEast(Path path) {
-        Location start = maze.findWestEntry();
-        start.setDirection(Direction.EAST);
-        Location end = maze.findEastEntry();
-        end.setDirection(Direction.EAST);
-        return traverseMaze(path, start, end);
-    }
-
-    private boolean checkEastToWest(Path path) {
-        Location start = maze.findEastEntry();
-        start.setDirection(Direction.WEST);
-        Location end = maze.findWestEntry();
-        end.setDirection(Direction.WEST);
-        return traverseMaze(path, start, end);
-    }
-
-    private boolean traverseMaze(Path path, Location start, Location end) {
-        loc = start;
-        boolean is_valid_instruction;
-
-        for (int i = 0; i < path.length(); i++) {
-            is_valid_instruction = true;
-            switch (path.getInstruction(i)) {
-                case Instruction.F:
-                    is_valid_instruction = goForward();
-                    break;
-                case Instruction.R:
-                    loc.setDirection(loc.getDirection().getRightDirection());
-                    break;
-                case Instruction.L:
-                    loc.setDirection(loc.getDirection().getLeftDirection());
-                    break;
-                default:
-                    throw new IllegalStateException();
-            }
-
-            if (!is_valid_instruction) {
-                return false;
-            }
-        }
-
-        return loc.equals(end);
     }
 }
