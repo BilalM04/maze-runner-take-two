@@ -51,6 +51,10 @@ public class Maze {
         Map<Direction, Tile> neighbours = new HashMap<>();
         int row = loc.getRow();
         int col = loc.getColumn();
+
+        if (row < 0 || row >= this.height() || col < 0 || col >= this.width()) {
+            throw new IndexOutOfBoundsException();
+        }
         
         if (row - 1 < 0) {
             neighbours.put(Direction.NORTH, null);
@@ -82,7 +86,7 @@ public class Maze {
     public Location findWestEntry() {
         for (int row = 0; row < config.MAZE_HEIGHT(); row++) {
             if (grid[row][0] == Tile.EMPTY) {
-                return new Location(row, 0, Direction.EAST, config);
+                return new Location(row, 0, Direction.EAST);
             }
         }
         throw new IllegalStateException("No West entry point found in the maze");
@@ -91,9 +95,17 @@ public class Maze {
     public Location findEastEntry() {
         for (int row = 0; row < config.MAZE_HEIGHT(); row++) {
             if (grid[row][config.MAZE_WIDTH()-1] == Tile.EMPTY) {
-                return new Location(row, config.MAZE_WIDTH()-1, Direction.EAST, config);
+                return new Location(row, config.MAZE_WIDTH() - 1, Direction.EAST);
             }
         }
         throw new IllegalStateException("No East entry point found in the maze");
+    }
+
+    public int width() {
+        return config.MAZE_WIDTH();
+    }
+
+    public int height() {
+        return config.MAZE_HEIGHT();
     }
 }

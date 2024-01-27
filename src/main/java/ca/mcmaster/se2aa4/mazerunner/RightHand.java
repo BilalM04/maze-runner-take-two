@@ -2,30 +2,14 @@ package ca.mcmaster.se2aa4.mazerunner;
 
 import java.io.IOException;
 
-public class RightHand extends MazeAlgorithm{
-    Explorer maze_explorer;
-    Maze maze;
+public class RightHand implements MazeAlgorithm{
+    private Maze maze;
 
     public RightHand(Configuration config) throws IOException {
-        maze = new Maze(config);
-        maze_explorer = new Explorer(maze);
+        this.maze = new Maze(config);
     }
 
-    public String getEastToWest(boolean factorized) {
-        Location start = maze.findEastEntry();
-        start.setDirection(Direction.WEST);
-        Location end = maze.findWestEntry();
-        end.setDirection(Direction.WEST);
-        Path path = findPath(start, end);
-
-        if (factorized) {
-            return path.getFactorizedPath();
-        } else {
-            return path.getCanonicalPath();
-        }
-    }
-
-    public String getWestToEast(boolean factorized) {
+    public String getPath(boolean factorized) {
         Location start = maze.findWestEntry();
         start.setDirection(Direction.EAST);
         Location end = maze.findEastEntry();
@@ -41,7 +25,7 @@ public class RightHand extends MazeAlgorithm{
 
     private Path findPath(Location entry, Location exit) {
         Path path = new Path();
-        maze_explorer.setLocation(entry);
+        Explorer maze_explorer = new MazeExplorer(this.maze, entry);
 
         while (!maze_explorer.isAt(exit)) {
             if (maze_explorer.goRight()) {
@@ -53,8 +37,8 @@ public class RightHand extends MazeAlgorithm{
                 path.addInstruction(Instruction.L);
                 path.addInstruction(Instruction.F);
             } else if (maze_explorer.goBackward()) {
-                path.addInstruction(Instruction.R);
-                path.addInstruction(Instruction.R);
+                path.addInstruction(Instruction.L);
+                path.addInstruction(Instruction.L);
                 path.addInstruction(Instruction.F);
             }
         }

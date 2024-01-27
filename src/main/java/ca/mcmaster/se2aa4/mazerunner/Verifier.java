@@ -3,12 +3,10 @@ package ca.mcmaster.se2aa4.mazerunner;
 import java.io.IOException;
 
 public class Verifier {
-    Explorer maze_explorer;
     Maze maze;
 
     public Verifier(Configuration config) throws IOException {
         maze = new Maze(config);
-        maze_explorer = new Explorer(maze);
     }
 
     public boolean verifyPath(Path path){
@@ -32,7 +30,7 @@ public class Verifier {
     }
 
     private boolean traverseMaze(Path path, Location start, Location end) {
-        maze_explorer.setLocation(start);
+        Explorer maze_explorer = new MazeExplorer(this.maze, start);
         boolean is_valid_instruction;
 
         for (int i = 0; i < path.length(); i++) {
