@@ -15,6 +15,9 @@ public class Path {
     }
 
     public Instruction getInstruction(int index) {
+        if (index < 0 || index >= this.length()){
+            throw new IndexOutOfBoundsException();
+        }
         return canonical_path.get(index);
     }
 
@@ -24,8 +27,11 @@ public class Path {
 
     public String getCanonicalPath() {
         StringBuilder canonical_path_str = new StringBuilder();
-        for (Instruction inst : canonical_path) {
-            canonical_path_str.append(inst.toString());
+        for (int i = 0; i < canonical_path.size(); i++) {
+            if (i > 0 && canonical_path.get(i) != canonical_path.get(i-1)) {
+                canonical_path_str.append(" ");
+            }
+            canonical_path_str.append(canonical_path.get(i).toString());
         }
         return canonical_path_str.toString();
     }

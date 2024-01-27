@@ -12,7 +12,7 @@ import org.apache.commons.cli.Options;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public record Configuration(String MAZE_FILE, Path INPUT_PATH, int MAZE_WIDTH, int MAZE_HEIGHT) {
+public record Configuration(String MAZE_FILE, Path PATH_SEQUENCE, int MAZE_WIDTH, int MAZE_HEIGHT) {
 
     private static final Logger logger = LogManager.getLogger();
 
@@ -26,15 +26,15 @@ public record Configuration(String MAZE_FILE, Path INPUT_PATH, int MAZE_WIDTH, i
         try {
             CommandLine cmd = parser.parse(options, args);
             String MAZE_FILE = cmd.getOptionValue("i");
-            Path INPUT_PATH = null;
+            Path PATH_SEQUENCE = null;
             logger.info("**** Reading the maze from file " + MAZE_FILE);
             if (cmd.hasOption("p")) {
                 String string_path = cmd.getOptionValue("p");
-                INPUT_PATH = storePath(string_path);
+                PATH_SEQUENCE = storePath(string_path);
             }
             int MAZE_HEIGHT = mazeHeight(MAZE_FILE);
             int MAZE_WIDTH = mazeWidth(MAZE_FILE);
-            return new Configuration(MAZE_FILE, INPUT_PATH, MAZE_WIDTH, MAZE_HEIGHT);
+            return new Configuration(MAZE_FILE, PATH_SEQUENCE, MAZE_WIDTH, MAZE_HEIGHT);
         } catch(Exception e) {
             throw new RuntimeException(e);
         }
@@ -65,6 +65,7 @@ public record Configuration(String MAZE_FILE, Path INPUT_PATH, int MAZE_WIDTH, i
 
     private static Path storePath(String path) {
         Path user_path = new Path();
+        path = path.replace(" ", "");
 
         for (int i = 0; i < path.length(); i++) {
             int repeat = 1;
@@ -92,8 +93,6 @@ public record Configuration(String MAZE_FILE, Path INPUT_PATH, int MAZE_WIDTH, i
                     case 'R':
                         user_path.addInstruction(Instruction.R);
                         break;
-                    case ' ':
-                        continue;
                     default:
                         throw new IllegalArgumentException("Invalid character in path: " + path.charAt(end));
                 }
