@@ -6,7 +6,7 @@ public class Verifier {
     Maze maze;
 
     public Verifier(Configuration config) throws IOException {
-        maze = new Maze(config);
+        maze = new ArrayMaze(config);
     }
 
     public boolean verifyPath(Path path){
