@@ -16,8 +16,6 @@ public record Configuration(String MAZE_FILE, Path PATH_SEQUENCE, int MAZE_WIDTH
 
     private static final Logger logger = LogManager.getLogger();
 
-    /* POTENTIALLY IMPLEMENT EXCEPTION LOGIC */
-
     public static Configuration load(String[] args) {
         Options options = new Options();
         options.addOption("i", "input", true, "Maze text file");

@@ -47,6 +47,13 @@ public class ArrayMaze implements Maze {
         buffered_reader.close();
     }
 
+    public Tile getTile(Location loc) {
+        if (loc.getRow() < 0 || loc.getRow() >= this.height() || loc.getColumn() < 0 || loc.getColumn() >= this.width()) {
+            throw new IllegalArgumentException();
+        }
+        return grid[loc.getRow()][loc.getColumn()];
+    }
+
     public Map<Direction, Tile> getNeighbours(Location loc) {
         Map<Direction, Tile> neighbours = new HashMap<>();
         int row = loc.getRow();

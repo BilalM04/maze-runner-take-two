@@ -10,6 +10,8 @@ public interface Maze {
 
     public Location findEastEntry();
 
+    public Tile getTile(Location loc) throws IndexOutOfBoundsException;
+
     public int width();
 
     public int height();
