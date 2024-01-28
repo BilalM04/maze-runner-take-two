@@ -11,6 +11,15 @@ public class ArrayMaze implements Maze {
     private Tile[][] grid;
     private Configuration config;
 
+    /**
+     * Constructs an ArrayMaze object based on the provided configuration.
+     * The constructor reads a maze file specified in the configuration,
+     * processes it, and initializes the grid of tiles accordingly in a 2D array.
+     *
+     * @param config The configuration object containing maze-related settings.
+     * @throws IOException If an I/O error occurs while reading the maze file.
+     * @throws IllegalArgumentException If an invalid character is encountered in the maze file.
+     */
     public ArrayMaze (Configuration config) throws IOException {
         this.config = config;
         Reader file_reader = new FileReader(config.MAZE_FILE());
@@ -47,6 +56,13 @@ public class ArrayMaze implements Maze {
         buffered_reader.close();
     }
 
+    /**
+     * Retrieves the tile at the specified location in the maze grid.
+     *
+     * @param loc The location for which to retrieve the tile.
+     * @return The tile at the specified location.
+     * @throws IllegalArgumentException If the location is outside the bounds of the maze grid.
+     */
     public Tile getTile(Location loc) {
         if (loc.getRow() < 0 || loc.getRow() >= this.height() || loc.getColumn() < 0 || loc.getColumn() >= this.width()) {
             throw new IllegalArgumentException();
@@ -54,6 +70,15 @@ public class ArrayMaze implements Maze {
         return grid[loc.getRow()][loc.getColumn()];
     }
 
+    /**
+     * Retrieves the neighboring tiles of the specified location in the maze grid.
+     * Neighbors are represented as a map of directions to tiles.
+     * If a neighbor in a specific direction is outside the maze bounds, it is set to null.
+     *
+     * @param loc The location for which to retrieve neighbors.
+     * @return A map of directions to tiles representing the neighboring tiles.
+     * @throws IndexOutOfBoundsException If the specified location is outside the bounds of the maze grid.
+     */
     public Map<Direction, Tile> getNeighbours(Location loc) {
         Map<Direction, Tile> neighbours = new HashMap<>();
         int row = loc.getRow();
@@ -90,6 +115,12 @@ public class ArrayMaze implements Maze {
         return neighbours;
     }
 
+    /**
+     * Finds the entry point on the west side of the maze.
+     *
+     * @return The location of the west entry point.
+     * @throws IllegalStateException If no west entry point is found in the maze.
+     */
     public Location findWestEntry() {
         for (int row = 0; row < config.MAZE_HEIGHT(); row++) {
             if (grid[row][0] == Tile.EMPTY) {
@@ -99,6 +130,12 @@ public class ArrayMaze implements Maze {
         throw new IllegalStateException("No West entry point found in the maze");
     }
 
+    /**
+     * Finds the entry point on the east side of the maze.
+     *
+     * @return The location of the east entry point.
+     * @throws IllegalStateException If no east entry point is found in the maze.
+     */
     public Location findEastEntry() {
         for (int row = 0; row < config.MAZE_HEIGHT(); row++) {
             if (grid[row][config.MAZE_WIDTH()-1] == Tile.EMPTY) {

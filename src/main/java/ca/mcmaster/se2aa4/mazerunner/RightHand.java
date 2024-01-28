@@ -9,6 +9,13 @@ public class RightHand implements MazeAlgorithm{
         this.maze = new ArrayMaze(config);
     }
 
+    /**
+     * Retrieves the path from the west entry point to the east entry point in the maze.
+     *
+     * @param factorized If true, the returned path is factorized.
+     *                   If false, the returned path is canonical.
+     * @return A string representation of the found path.
+     */
     public String getPath(boolean factorized) {
         Location start = maze.findWestEntry();
         start.setDirection(Direction.EAST);
@@ -23,6 +30,15 @@ public class RightHand implements MazeAlgorithm{
         }
     }
 
+    /**
+     * Finds a path from the entry point to the exit point in the maze using the right hand rule.
+     * Algorithm: Go right. If you can't go right, go forward. If you can't go forward, go left.
+     *            If you can't go left go backwards.
+     *
+     * @param entry The starting location in the maze.
+     * @param exit The target location to reach in the maze.
+     * @return A Path object representing the found path from the entry to the exit.
+     */
     private Path findPath(Location entry, Location exit) {
         Path path = new Path();
         Explorer maze_explorer = new MazeExplorer(this.maze, entry);

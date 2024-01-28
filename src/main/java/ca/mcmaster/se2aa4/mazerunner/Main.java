@@ -17,16 +17,16 @@ public class Main {
             if (config.PATH_SEQUENCE() != null) {
                 boolean is_valid = path_verifier.verifyPath(config.PATH_SEQUENCE());
                 if (is_valid) {
-                    System.out.println("Correct.");
+                    System.out.println("correct path");
                 } else {
-                    System.out.println("Incorrect.");
+                    System.out.println("incorrect path");
                 }
             } else {
                 String maze_path = right_hand_algo.getPath(true);
                 System.out.println(maze_path);
             }
         } catch(RuntimeException | IOException e) {
-            logger.error(e);
+            System.out.println(e);
         }
     }
 }

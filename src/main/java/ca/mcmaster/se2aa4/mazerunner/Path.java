@@ -25,6 +25,11 @@ public class Path {
         return canonical_path.size();
     }
 
+    /**
+     * Retrieves the canonical path as a string representation.
+     *
+     * @return A string representation of the canonical path.
+     */
     public String getCanonicalPath() {
         StringBuilder canonical_path_str = new StringBuilder();
         for (int i = 0; i < canonical_path.size(); i++) {
@@ -36,16 +41,23 @@ public class Path {
         return canonical_path_str.toString();
     }
 
+    /**
+     * Retrieves the factorized path as a string representation.
+     *
+     * @return A string representation of the factorized path.
+     */
     public String getFactorizedPath() {
          StringBuilder factorized_path_str = new StringBuilder();
          for (int i = 0; i < canonical_path.size(); i++) {
             Instruction current_instruction = canonical_path.get(i);
             int count = 0;
+            // counts consequtive identical instructions
             while (i < canonical_path.size() && current_instruction.toString().equals(canonical_path.get(i).toString())) {
                 i++;
                 count++;
             }
             i--;
+            // combines number + instruction into string
             if (count == 1) {
                 factorized_path_str.append(current_instruction.toString() + " ");
             } else {

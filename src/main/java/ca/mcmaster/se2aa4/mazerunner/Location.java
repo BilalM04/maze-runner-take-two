@@ -36,19 +36,19 @@ public class Location {
     }
 
     public Direction getRightDirection() {
-        return this.direction.getRightDirection();
+        return this.direction.getRightDirection(); // calls method from enum to retreive the relative right direction
     }
 
     public Direction getLeftDirection() {
-        return this.direction.getLeftDirection();
+        return this.direction.getLeftDirection(); // calls method from enum to retreive the relative left direction
     }
 
     public Direction getOppositeDirection() {
-        return this.direction.getOppositeDirection();
+        return this.direction.getOppositeDirection(); // calls method from enum to retreive the relative opposite direction
     }
 
     public boolean equals(Location loc) {
-        if (this.row == loc.row && this.column == loc.column && this.direction == loc.direction) {
+        if (this.row == loc.row && this.column == loc.column) {
             return true;
         }
         return false;
