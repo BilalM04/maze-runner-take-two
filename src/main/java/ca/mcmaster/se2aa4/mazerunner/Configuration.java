@@ -9,12 +9,8 @@ import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.Options;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 public record Configuration(String MAZE_FILE, Path PATH_SEQUENCE, int MAZE_WIDTH, int MAZE_HEIGHT) {
-
-    private static final Logger logger = LogManager.getLogger();
 
     public static Configuration load(String[] args) {
         Options options = new Options();
@@ -25,7 +21,6 @@ public record Configuration(String MAZE_FILE, Path PATH_SEQUENCE, int MAZE_WIDTH
             CommandLine cmd = parser.parse(options, args);
             String MAZE_FILE = cmd.getOptionValue("i");
             Path PATH_SEQUENCE = null;
-            logger.info("**** Reading the maze from file " + MAZE_FILE);
             if (cmd.hasOption("p")) {
                 String string_path = cmd.getOptionValue("p");
                 PATH_SEQUENCE = storePath(string_path);
@@ -92,7 +87,7 @@ public record Configuration(String MAZE_FILE, Path PATH_SEQUENCE, int MAZE_WIDTH
                         user_path.addInstruction(Instruction.R);
                         break;
                     default:
-                        throw new IllegalArgumentException("Invalid character in path: " + path.charAt(end));
+                        throw new IllegalArgumentException("Invalid character in input path: " + path.charAt(end));
                 }
             }
         }
