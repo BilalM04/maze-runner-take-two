@@ -7,6 +7,9 @@ public class MazeExplorer implements Explorer {
 
     public MazeExplorer(Maze maze, Location loc) {
         this.maze = maze;
+        if (loc.getRow() < 0 || loc.getRow() >= maze.height() || loc.getColumn() < 0 || loc.getColumn() >= maze.width() || maze.getTile(loc) == Tile.WALL) {
+            throw new IndexOutOfBoundsException();
+        }
         this.loc = loc;
     }
 
@@ -26,7 +29,7 @@ public class MazeExplorer implements Explorer {
     public boolean goLeft() {
         Map<Direction, Tile> neighbours = maze.getNeighbours(loc);
         Direction left = this.loc.getLeftDirection();
-        
+
         if (neighbours.get(left) == Tile.EMPTY) {
             this.loc.setDirection(left);
             this.move(left);

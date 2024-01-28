@@ -6,7 +6,7 @@ public class RightHand implements MazeAlgorithm{
     private Maze maze;
 
     public RightHand(Configuration config) throws IOException {
-        this.maze = new Maze(config);
+        this.maze = new ArrayMaze(config);
     }
 
     public String getPath(boolean factorized) {
