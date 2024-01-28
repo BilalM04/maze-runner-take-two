@@ -3,7 +3,7 @@ package ca.mcmaster.se2aa4.mazerunner;
 import java.io.IOException;
 
 public class Verifier {
-    Maze maze;
+    private Maze maze;
 
     public Verifier(Configuration config) throws IOException {
         maze = new ArrayMaze(config);
@@ -29,6 +29,16 @@ public class Verifier {
         return traverseMaze(path, start, end);
     }
 
+    /**
+     * Traverses the maze according to the provided path, starting from a specified location and aiming to reach the end.
+     * The method uses a MazeExplorer to follow the instructions in the path and checks if the explorer ends up at the expected location.
+     *
+     * @param path The path containing instructions for the explorer to follow.
+     * @param start The starting location in the maze.
+     * @param end The expected ending location in the maze.
+     * @return True if the explorer successfully traverses the maze according to the path and reaches the end, false otherwise.
+     * @throws IllegalStateException If an invalid instruction is encountered in the path.
+     */
     private boolean traverseMaze(Path path, Location start, Location end) {
         Explorer maze_explorer = new MazeExplorer(this.maze, start);
         boolean is_valid_instruction;
