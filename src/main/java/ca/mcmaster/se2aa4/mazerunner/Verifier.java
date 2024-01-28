@@ -44,7 +44,7 @@ public class Verifier {
         boolean is_valid_instruction;
 
         for (int i = 0; i < path.length(); i++) {
-            is_valid_instruction = true;
+            is_valid_instruction = true; // variable to keep track whether an instruction was succesful
             switch (path.getInstruction(i)) {
                 case Instruction.F:
                     is_valid_instruction = maze_explorer.goForward();
