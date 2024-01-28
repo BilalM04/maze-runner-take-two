@@ -48,7 +48,7 @@ public class Location {
     }
 
     public boolean equals(Location loc) {
-        if (this.row == loc.row && this.column == loc.column && this.direction == loc.direction) {
+        if (this.row == loc.row && this.column == loc.column) {
             return true;
         }
         return false;
