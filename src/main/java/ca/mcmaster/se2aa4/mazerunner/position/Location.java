@@ -71,19 +71,4 @@ public class Location {
             return false;
         return true;
     }
-
-    // public boolean equals(Object obj) {
-    //     if (!(obj instanceof Location)) {
-    //         return false;
-    //     }
-
-    //     Location loc = (Location) obj;
-
-    //     if (this.row == loc.row && this.column == loc.column) {
-    //         return true;
-    //     }
-    //     return false;
-    // }
-
-    
 }
