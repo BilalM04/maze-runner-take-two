@@ -30,8 +30,8 @@ public record Configuration(String MAZE_FILE, Path PATH_SEQUENCE) {
             String MAZE_FILE = cmd.getOptionValue("i");
             Path PATH_SEQUENCE = null;
             if (cmd.hasOption("p")) {
-                String string_path = cmd.getOptionValue("p");
-                PATH_SEQUENCE = builder.buildPath(string_path);
+                String stringPath = cmd.getOptionValue("p");
+                PATH_SEQUENCE = builder.buildPath(stringPath);
             }
             return new Configuration(MAZE_FILE, PATH_SEQUENCE);
         } catch(ParseException e) {

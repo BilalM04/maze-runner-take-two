@@ -42,18 +42,18 @@ public class RightHand implements MazeAlgorithm {
      */
     private Path findPath(Maze maze, Location entry, Location exit) {
         Path path = new Path();
-        Explorer maze_explorer = new MazeExplorer(maze, entry);
+        Explorer mazeExplorer = new MazeExplorer(maze, entry);
 
-        while (!maze_explorer.isAt(exit)) {
-            if (maze_explorer.goRight()) {
+        while (!mazeExplorer.isAt(exit)) {
+            if (mazeExplorer.goRight()) {
                 path.addInstruction(Instruction.R);
                 path.addInstruction(Instruction.F);
-            } else if (maze_explorer.goForward()) {
+            } else if (mazeExplorer.goForward()) {
                 path.addInstruction(Instruction.F);
-            } else if (maze_explorer.goLeft()) {
+            } else if (mazeExplorer.goLeft()) {
                 path.addInstruction(Instruction.L);
                 path.addInstruction(Instruction.F);
-            } else if (maze_explorer.goBackward()) {
+            } else if (mazeExplorer.goBackward()) {
                 path.addInstruction(Instruction.L);
                 path.addInstruction(Instruction.L);
                 path.addInstruction(Instruction.F);

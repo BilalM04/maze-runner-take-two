@@ -41,30 +41,30 @@ public class PathVerifier implements Verifier {
      * @throws IllegalStateException If an invalid instruction is encountered in the path.
      */
     private boolean traverseMaze(Maze maze, Path path, Location start, Location end) {
-        Explorer maze_explorer = new MazeExplorer(maze, start);
-        boolean is_valid_instruction;
+        Explorer mazeExplorer = new MazeExplorer(maze, start);
+        boolean isValidInstruction;
 
         for (int i = 0; i < path.length(); i++) {
-            is_valid_instruction = true; // variable to keep track whether an instruction was succesful
+            isValidInstruction = true; // variable to keep track whether an instruction was succesful
             switch (path.getInstruction(i)) {
                 case Instruction.F:
-                    is_valid_instruction = maze_explorer.goForward();
+                    isValidInstruction = mazeExplorer.goForward();
                     break;
                 case Instruction.R:
-                    maze_explorer.turnRight();
+                    mazeExplorer.turnRight();
                     break;
                 case Instruction.L:
-                    maze_explorer.turnLeft();
+                    mazeExplorer.turnLeft();
                     break;
                 default:
                     throw new IllegalStateException();
             }
 
-            if (!is_valid_instruction) {
+            if (!isValidInstruction) {
                 return false;
             }
         }
 
-        return maze_explorer.isAt(end);
+        return mazeExplorer.isAt(end);
     }
 }

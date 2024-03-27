@@ -21,18 +21,18 @@ public class Main {
         Configuration config = Configuration.load(args);
         try {
             Maze maze = new ListMaze(config.MAZE_FILE());
-            MazeAlgorithm right_hand_algo = new RightHand();
-            Verifier path_verifier = new PathVerifier();
+            MazeAlgorithm rightHand = new RightHand();
+            Verifier pathVerifier = new PathVerifier();
             if (config.PATH_SEQUENCE() != null) {
-                boolean is_valid = path_verifier.verifyPath(maze, config.PATH_SEQUENCE());
-                if (is_valid) {
+                boolean isValid = pathVerifier.verifyPath(maze, config.PATH_SEQUENCE());
+                if (isValid) {
                     System.out.println("correct path");
                 } else {
                     System.out.println("incorrect path");
                 }
             } else {
-                String maze_path = right_hand_algo.getPath(maze, true);
-                System.out.println(maze_path);
+                String mazePath = rightHand.getPath(maze, true);
+                System.out.println(mazePath);
             }
         } catch(RuntimeException | IOException e) {
             System.out.println(e);

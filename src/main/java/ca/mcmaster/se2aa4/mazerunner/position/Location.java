@@ -47,14 +47,13 @@ public class Location {
         return this.direction.getOppositeDirection(); // calls method from enum to retreive the relative opposite direction
     }
 
-    @Override
     public boolean equals(Object obj) {
         if (!(obj instanceof Location)) {
             return false;
         }
 
         Location loc = (Location) obj;
-        
+
         if (this.row == loc.row && this.column == loc.column) {
             return true;
         }
