@@ -7,7 +7,7 @@ import ca.mcmaster.se2aa4.mazerunner.path.Path;
 import ca.mcmaster.se2aa4.mazerunner.position.Direction;
 import ca.mcmaster.se2aa4.mazerunner.position.Location;
 
-public class DFS implements MazeAlgorithm {
+public class BFS implements MazeAlgorithm {
     
     public String getPath(Maze maze, boolean factorized) {
         Location start = maze.findWestEntry();
