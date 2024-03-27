@@ -1,41 +1,33 @@
 package ca.mcmaster.se2aa4.mazerunner.verification;
 
-import java.io.IOException;
-
 import ca.mcmaster.se2aa4.mazerunner.explorer.Explorer;
 import ca.mcmaster.se2aa4.mazerunner.explorer.MazeExplorer;
-import ca.mcmaster.se2aa4.mazerunner.maze.ListMaze;
 import ca.mcmaster.se2aa4.mazerunner.maze.Maze;
 import ca.mcmaster.se2aa4.mazerunner.path.Instruction;
 import ca.mcmaster.se2aa4.mazerunner.path.Path;
 import ca.mcmaster.se2aa4.mazerunner.position.Direction;
 import ca.mcmaster.se2aa4.mazerunner.position.Location;
 
-public class PathVerifier implements Verifier{
-    private Maze maze;
+public class PathVerifier implements Verifier {
 
-    public PathVerifier(String filePath) throws IOException {
-        maze = new ListMaze(filePath);
+    public boolean verifyPath(Maze maze, Path path){
+        return checkWestToEast(maze, path) || checkEastToWest(maze, path);
     }
 
-    public boolean verifyPath(Path path){
-        return checkWestToEast(path) || checkEastToWest(path);
-    }
-
-    private boolean checkWestToEast(Path path) {
+    private boolean checkWestToEast(Maze maze, Path path) {
         Location start = maze.findWestEntry();
         start.setDirection(Direction.EAST);
         Location end = maze.findEastEntry();
         end.setDirection(Direction.EAST);
-        return traverseMaze(path, start, end);
+        return traverseMaze(maze, path, start, end);
     }
 
-    private boolean checkEastToWest(Path path) {
+    private boolean checkEastToWest(Maze maze, Path path) {
         Location start = maze.findEastEntry();
         start.setDirection(Direction.WEST);
         Location end = maze.findWestEntry();
         end.setDirection(Direction.WEST);
-        return traverseMaze(path, start, end);
+        return traverseMaze(maze, path, start, end);
     }
 
     /**
@@ -48,8 +40,8 @@ public class PathVerifier implements Verifier{
      * @return True if the explorer successfully traverses the maze according to the path and reaches the end, false otherwise.
      * @throws IllegalStateException If an invalid instruction is encountered in the path.
      */
-    private boolean traverseMaze(Path path, Location start, Location end) {
-        Explorer maze_explorer = new MazeExplorer(this.maze, start);
+    private boolean traverseMaze(Maze maze, Path path, Location start, Location end) {
+        Explorer maze_explorer = new MazeExplorer(maze, start);
         boolean is_valid_instruction;
 
         for (int i = 0; i < path.length(); i++) {
