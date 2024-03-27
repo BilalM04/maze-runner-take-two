@@ -19,7 +19,7 @@ package algorithm {
 
     class RightHand
 
-    class DFS
+    class BFS
 }
 
 package configuration {
@@ -84,7 +84,7 @@ Main *--up> Verifier
 Maze <|..up ArrayMaze
 ArrayMaze o--up> Tile
 
-DFS ..down|> MazeAlgorithm
+BFS ..down|> MazeAlgorithm
 RightHand ..down|> MazeAlgorithm
 
 ' Main --> Path
@@ -96,7 +96,7 @@ MazeExplorer --up> Location
 Location --up> Direction
 
 RightHand --up> Explorer
-DFS --up> Explorer
+BFS --up> Explorer
 
 MazeExplorer ..right|> Explorer
 

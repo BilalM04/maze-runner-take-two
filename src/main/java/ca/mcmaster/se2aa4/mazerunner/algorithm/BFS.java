@@ -1,5 +1,8 @@
 package ca.mcmaster.se2aa4.mazerunner.algorithm;
 
+import java.util.List;
+import java.util.Map;
+
 import ca.mcmaster.se2aa4.mazerunner.explorer.Explorer;
 import ca.mcmaster.se2aa4.mazerunner.explorer.MazeExplorer;
 import ca.mcmaster.se2aa4.mazerunner.maze.Maze;
@@ -13,21 +16,27 @@ public class BFS implements MazeAlgorithm {
         Location start = maze.findWestEntry();
         start.setDirection(Direction.EAST);
         Location end = maze.findEastEntry();
-        end.setDirection(Direction.EAST);
-        Path path = findPath(maze, start, end);
+        end.setDirection(Direction.EAST); 
+        List<Object> result = findPath(maze, start, end);
+        Map<Location, Location> pathIndex = (Map) result.get(0);
+        Map<Location, Path> costIndex = (Map) result.get(1);
 
-        if (factorized) {
-            return path.getFactorizedPath();
-        } else {
-            return path.getCanonicalPath();
-        }
+        // if (factorized) {
+        //     return path.getFactorizedPath();
+        // } else {
+        //     return path.getCanonicalPath();
+        // }
+
+        return "";
     }
 
-    private Path findPath(Maze maze, Location start, Location end) {
+    private List<Object> findPath(Maze maze, Location start, Location end) {
         Path path = new Path();
         Explorer explorer = new MazeExplorer(maze, start);
 
 
-        return path;
+
+
+        return null;
     }
 }
