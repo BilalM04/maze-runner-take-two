@@ -1,22 +1,14 @@
 package ca.mcmaster.se2aa4.mazerunner.algorithm;
 
-import java.io.IOException;
-
 import ca.mcmaster.se2aa4.mazerunner.explorer.Explorer;
 import ca.mcmaster.se2aa4.mazerunner.explorer.MazeExplorer;
-import ca.mcmaster.se2aa4.mazerunner.maze.ListMaze;
 import ca.mcmaster.se2aa4.mazerunner.maze.Maze;
 import ca.mcmaster.se2aa4.mazerunner.path.Instruction;
 import ca.mcmaster.se2aa4.mazerunner.path.Path;
 import ca.mcmaster.se2aa4.mazerunner.position.Direction;
 import ca.mcmaster.se2aa4.mazerunner.position.Location;
 
-public class RightHand implements MazeAlgorithm{
-    private Maze maze;
-
-    public RightHand(String filePath) throws IOException {
-        this.maze = new ListMaze(filePath);
-    }
+public class RightHand implements MazeAlgorithm {
 
     /**
      * Retrieves the path from the west entry point to the east entry point in the maze.
@@ -25,12 +17,12 @@ public class RightHand implements MazeAlgorithm{
      *                   If false, the returned path is canonical.
      * @return A string representation of the found path.
      */
-    public String getPath(boolean factorized) {
+    public String getPath(Maze maze, boolean factorized) {
         Location start = maze.findWestEntry();
         start.setDirection(Direction.EAST);
         Location end = maze.findEastEntry();
         end.setDirection(Direction.EAST);
-        Path path = findPath(start, end);
+        Path path = findPath(maze, start, end);
 
         if (factorized) {
             return path.getFactorizedPath();
@@ -48,20 +40,20 @@ public class RightHand implements MazeAlgorithm{
      * @param exit The target location to reach in the maze.
      * @return A Path object representing the found path from the entry to the exit.
      */
-    private Path findPath(Location entry, Location exit) {
+    private Path findPath(Maze maze, Location entry, Location exit) {
         Path path = new Path();
-        Explorer maze_explorer = new MazeExplorer(this.maze, entry);
+        Explorer mazeExplorer = new MazeExplorer(maze, entry);
 
-        while (!maze_explorer.isAt(exit)) {
-            if (maze_explorer.goRight()) {
+        while (!mazeExplorer.isAt(exit)) {
+            if (mazeExplorer.goRight()) {
                 path.addInstruction(Instruction.R);
                 path.addInstruction(Instruction.F);
-            } else if (maze_explorer.goForward()) {
+            } else if (mazeExplorer.goForward()) {
                 path.addInstruction(Instruction.F);
-            } else if (maze_explorer.goLeft()) {
+            } else if (mazeExplorer.goLeft()) {
                 path.addInstruction(Instruction.L);
                 path.addInstruction(Instruction.F);
-            } else if (maze_explorer.goBackward()) {
+            } else if (mazeExplorer.goBackward()) {
                 path.addInstruction(Instruction.L);
                 path.addInstruction(Instruction.L);
                 path.addInstruction(Instruction.F);

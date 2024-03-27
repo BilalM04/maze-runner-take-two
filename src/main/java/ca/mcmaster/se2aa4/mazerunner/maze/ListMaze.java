@@ -3,7 +3,6 @@ package ca.mcmaster.se2aa4.mazerunner.maze;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.Reader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -28,40 +27,37 @@ public class ListMaze implements Maze {
      */
     public ListMaze (String filePath) throws IOException {
         this.grid = new ArrayList<>();
+        BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath));
+        String mazeRow = bufferedReader.readLine();
+        this.width = mazeRow.length();
+        int gridRowIndex = 0;
 
-        Reader file_reader = new FileReader(filePath);
-        BufferedReader buffered_reader = new BufferedReader(file_reader);
-
-        String maze_row = buffered_reader.readLine();
-        this.width = maze_row.length();
-        int grid_row_index = 0;
-
-        while (maze_row != null) {
-            char[] maze_row_arr = maze_row.toCharArray();
+        while (mazeRow != null) {
+            char[] mazeRowArr = mazeRow.toCharArray();
             this.grid.add(new ArrayList<>());
 
             for (int i = 0; i < width; i++) {
-                if (i >= maze_row_arr.length) {
-                    grid.get(grid_row_index).add(Tile.EMPTY);
+                if (i >= mazeRowArr.length) {
+                    grid.get(gridRowIndex).add(Tile.EMPTY);
                 } else {
-                    switch (maze_row_arr[i]) {
+                    switch (mazeRowArr[i]) {
                         case '#':
-                            grid.get(grid_row_index).add(Tile.WALL);
+                            grid.get(gridRowIndex).add(Tile.WALL);
                             break;
                         case ' ':
-                            grid.get(grid_row_index).add(Tile.EMPTY);
+                            grid.get(gridRowIndex).add(Tile.EMPTY);
                             break;
                         default:
-                            throw new IllegalArgumentException("Invalid character in maze file: " + maze_row_arr[i]);
+                            throw new IllegalArgumentException("Invalid character in maze file: " + mazeRowArr[i]);
                     }
                 }
             }
 
-            grid_row_index++;
-            maze_row = buffered_reader.readLine();
+            gridRowIndex++;
+            mazeRow = bufferedReader.readLine();
         }
 
-        buffered_reader.close();
+        bufferedReader.close();
         this.height = grid.size();
     }
 
@@ -76,7 +72,7 @@ public class ListMaze implements Maze {
         if (loc.getRow() < 0 || loc.getRow() >= height || loc.getColumn() < 0 || loc.getColumn() >= width) {
             throw new IllegalArgumentException();
         }
-        return grid.get(loc.getRow()).get(loc.getColumn()); //grid[loc.getRow()][loc.getColumn()];
+        return grid.get(loc.getRow()).get(loc.getColumn());
     }
 
     /**

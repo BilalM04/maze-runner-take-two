@@ -4,25 +4,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Path {
-    private List<Instruction> canonical_path;
+    private List<Instruction> canonicalPath;
 
     public Path() {
-        this.canonical_path = new ArrayList<>();
+        this.canonicalPath = new ArrayList<>();
     }
 
     public void addInstruction(Instruction instruction) {
-        canonical_path.add(instruction);
+        canonicalPath.add(instruction);
     }
 
     public Instruction getInstruction(int index) {
         if (index < 0 || index >= this.length()){
             throw new IndexOutOfBoundsException();
         }
-        return canonical_path.get(index);
+        return canonicalPath.get(index);
     }
 
     public int length() {
-        return canonical_path.size();
+        return canonicalPath.size();
     }
 
     /**
@@ -31,14 +31,14 @@ public class Path {
      * @return A string representation of the canonical path.
      */
     public String getCanonicalPath() {
-        StringBuilder canonical_path_str = new StringBuilder();
-        for (int i = 0; i < canonical_path.size(); i++) {
-            if (i > 0 && canonical_path.get(i) != canonical_path.get(i-1)) {
-                canonical_path_str.append(" ");
+        StringBuilder canonicalPathStr = new StringBuilder();
+        for (int i = 0; i < canonicalPath.size(); i++) {
+            if (i > 0 && canonicalPath.get(i) != canonicalPath.get(i-1)) {
+                canonicalPathStr.append(" ");
             }
-            canonical_path_str.append(canonical_path.get(i).toString());
+            canonicalPathStr.append(canonicalPath.get(i).toString());
         }
-        return canonical_path_str.toString();
+        return canonicalPathStr.toString();
     }
 
     /**
@@ -47,23 +47,23 @@ public class Path {
      * @return A string representation of the factorized path.
      */
     public String getFactorizedPath() {
-         StringBuilder factorized_path_str = new StringBuilder();
-         for (int i = 0; i < canonical_path.size(); i++) {
-            Instruction current_instruction = canonical_path.get(i);
+         StringBuilder factorizedPathStr = new StringBuilder();
+         for (int i = 0; i < canonicalPath.size(); i++) {
+            Instruction currentInstruction = canonicalPath.get(i);
             int count = 0;
             // counts consequtive identical instructions
-            while (i < canonical_path.size() && current_instruction.toString().equals(canonical_path.get(i).toString())) {
+            while (i < canonicalPath.size() && currentInstruction.toString().equals(canonicalPath.get(i).toString())) {
                 i++;
                 count++;
             }
             i--;
             // combines number + instruction into string
             if (count == 1) {
-                factorized_path_str.append(current_instruction.toString() + " ");
+                factorizedPathStr.append(currentInstruction.toString() + " ");
             } else {
-                factorized_path_str.append(count + "" + current_instruction.toString() + " ");
+                factorizedPathStr.append(count + "" + currentInstruction.toString() + " ");
             }
          }
-         return factorized_path_str.toString();
+         return factorizedPathStr.toString();
     }
 }

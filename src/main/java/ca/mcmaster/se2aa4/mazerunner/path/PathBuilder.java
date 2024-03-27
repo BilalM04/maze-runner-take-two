@@ -10,7 +10,7 @@ public class PathBuilder {
      * @throws IllegalArgumentException If an invalid character is encountered in the path string.
      */
     public Path buildPath(String strPath) {
-        Path user_path = new Path();
+        Path userPath = new Path();
         strPath = strPath.replace(" ", "");
 
         for (int i = 0; i < strPath.length(); i++) {
@@ -31,13 +31,13 @@ public class PathBuilder {
             for (int r = 0; r < repeat; r++) {
                 switch (strPath.charAt(end)) {
                     case 'F':
-                        user_path.addInstruction(Instruction.F);
+                        userPath.addInstruction(Instruction.F);
                         break;
                     case 'L':
-                        user_path.addInstruction(Instruction.L);
+                        userPath.addInstruction(Instruction.L);
                         break;
                     case 'R':
-                        user_path.addInstruction(Instruction.R);
+                        userPath.addInstruction(Instruction.R);
                         break;
                     default:
                         throw new IllegalArgumentException("Invalid character in path: " + strPath.charAt(end));
@@ -45,6 +45,6 @@ public class PathBuilder {
             }
         }
 
-        return user_path;
+        return userPath;
     }
 }
