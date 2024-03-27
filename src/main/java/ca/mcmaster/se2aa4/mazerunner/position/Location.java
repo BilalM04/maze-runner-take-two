@@ -47,16 +47,43 @@ public class Location {
         return this.direction.getOppositeDirection(); // calls method from enum to retreive the relative opposite direction
     }
 
-    public boolean equals(Object obj) {
-        if (!(obj instanceof Location)) {
-            return false;
-        }
-
-        Location loc = (Location) obj;
-
-        if (this.row == loc.row && this.column == loc.column) {
-            return true;
-        }
-        return false;
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + row;
+        result = prime * result + column;
+        return result;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Location other = (Location) obj;
+        if (row != other.row)
+            return false;
+        if (column != other.column)
+            return false;
+        return true;
+    }
+
+    // public boolean equals(Object obj) {
+    //     if (!(obj instanceof Location)) {
+    //         return false;
+    //     }
+
+    //     Location loc = (Location) obj;
+
+    //     if (this.row == loc.row && this.column == loc.column) {
+    //         return true;
+    //     }
+    //     return false;
+    // }
+
+    
 }
