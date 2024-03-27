@@ -4,7 +4,9 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import ca.mcmaster.se2aa4.mazerunner.configuration.Configuration;
@@ -12,8 +14,10 @@ import ca.mcmaster.se2aa4.mazerunner.position.Direction;
 import ca.mcmaster.se2aa4.mazerunner.position.Location;
 
 public class ListMaze implements Maze {
-    private Tile[][] grid;
+    private final List<List<Tile>> grid;
     private Configuration config;
+    private final int width;
+    private final int height;
 
     /**
      * Constructs an ArrayMaze object based on the provided configuration.
@@ -26,26 +30,29 @@ public class ListMaze implements Maze {
      */
     public ListMaze (Configuration config) throws IOException {
         this.config = config;
+        this.grid = new ArrayList<>();
+        
         Reader file_reader = new FileReader(config.MAZE_FILE());
         BufferedReader buffered_reader = new BufferedReader(file_reader);
 
-        grid = new Tile[config.MAZE_HEIGHT()][config.MAZE_WIDTH()];
         String maze_row = buffered_reader.readLine();
+        this.width = maze_row.length();
         int grid_row_index = 0;
 
         while (maze_row != null) {
             char[] maze_row_arr = maze_row.toCharArray();
+            this.grid.add(new ArrayList<>());
 
-            for (int i = 0; i < config.MAZE_WIDTH(); i++) {
+            for (int i = 0; i < width; i++) {
                 if (i >= maze_row_arr.length) {
-                    grid[grid_row_index][i] = Tile.EMPTY;
+                    grid.get(grid_row_index).add(Tile.EMPTY);
                 } else {
                     switch (maze_row_arr[i]) {
                         case '#':
-                            grid[grid_row_index][i] = Tile.WALL;
+                            grid.get(grid_row_index).add(Tile.WALL);
                             break;
                         case ' ':
-                            grid[grid_row_index][i]  = Tile.EMPTY;
+                            grid.get(grid_row_index).add(Tile.EMPTY);
                             break;
                         default:
                             throw new IllegalArgumentException("Invalid character in maze file: " + maze_row_arr[i]);
@@ -58,6 +65,7 @@ public class ListMaze implements Maze {
         }
 
         buffered_reader.close();
+        this.height = grid.size();
     }
 
     /**
@@ -68,10 +76,10 @@ public class ListMaze implements Maze {
      * @throws IllegalArgumentException If the location is outside the bounds of the maze grid.
      */
     public Tile getTile(Location loc) {
-        if (loc.getRow() < 0 || loc.getRow() >= this.height() || loc.getColumn() < 0 || loc.getColumn() >= this.width()) {
+        if (loc.getRow() < 0 || loc.getRow() >= height || loc.getColumn() < 0 || loc.getColumn() >= width) {
             throw new IllegalArgumentException();
         }
-        return grid[loc.getRow()][loc.getColumn()];
+        return grid.get(loc.getRow()).get(loc.getColumn()); //grid[loc.getRow()][loc.getColumn()];
     }
 
     /**
@@ -88,32 +96,32 @@ public class ListMaze implements Maze {
         int row = loc.getRow();
         int col = loc.getColumn();
 
-        if (row < 0 || row >= this.height() || col < 0 || col >= this.width()) {
+        if (row < 0 || row >= height || col < 0 || col >= width) {
             throw new IndexOutOfBoundsException();
         }
         
         if (row - 1 < 0) {
             neighbours.put(Direction.NORTH, null);
         } else {
-            neighbours.put(Direction.NORTH, grid[row-1][col]);
+            neighbours.put(Direction.NORTH, grid.get(row - 1).get(col));
         }
 
         if (row + 1 >= config.MAZE_HEIGHT()) {
             neighbours.put(Direction.SOUTH, null);
         } else {
-            neighbours.put(Direction.SOUTH, grid[row+1][col]);
+            neighbours.put(Direction.SOUTH, grid.get(row + 1).get(col));
         }
 
         if (col - 1 < 0) {
             neighbours.put(Direction.WEST, null);
         } else {
-            neighbours.put(Direction.WEST, grid[row][col-1]);
+            neighbours.put(Direction.WEST, grid.get(row ).get(col - 1));
         }
 
         if (col + 1 >= config.MAZE_WIDTH()) {
             neighbours.put(Direction.EAST, null);
         } else {
-            neighbours.put(Direction.EAST, grid[row][col+1]);
+            neighbours.put(Direction.EAST, grid.get(row).get(col + 1));
         }
 
         return neighbours;
@@ -126,8 +134,8 @@ public class ListMaze implements Maze {
      * @throws IllegalStateException If no west entry point is found in the maze.
      */
     public Location findWestEntry() {
-        for (int row = 0; row < config.MAZE_HEIGHT(); row++) {
-            if (grid[row][0] == Tile.EMPTY) {
+        for (int row = 0; row < height; row++) {
+            if (grid.get(row).get(0) == Tile.EMPTY) {
                 return new Location(row, 0, Direction.EAST);
             }
         }
@@ -141,8 +149,8 @@ public class ListMaze implements Maze {
      * @throws IllegalStateException If no east entry point is found in the maze.
      */
     public Location findEastEntry() {
-        for (int row = 0; row < config.MAZE_HEIGHT(); row++) {
-            if (grid[row][config.MAZE_WIDTH()-1] == Tile.EMPTY) {
+        for (int row = 0; row < height; row++) {
+            if (grid.get(row).get(width - 1) == Tile.EMPTY) {
                 return new Location(row, config.MAZE_WIDTH() - 1, Direction.EAST);
             }
         }
@@ -150,10 +158,10 @@ public class ListMaze implements Maze {
     }
 
     public int width() {
-        return config.MAZE_WIDTH();
+        return this.width;
     }
 
     public int height() {
-        return config.MAZE_HEIGHT();
+        return this.height;
     }
 }
