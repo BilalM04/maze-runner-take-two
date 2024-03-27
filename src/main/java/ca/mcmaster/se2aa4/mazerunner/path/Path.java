@@ -14,6 +14,12 @@ public class Path {
         canonicalPath.add(instruction);
     }
 
+    public void appendPath(Path other) {
+        for (int i = 0; i < other.length(); i++) {
+            canonicalPath.add(other.getInstruction(i));
+        }
+    }
+
     public Instruction getInstruction(int index) {
         if (index < 0 || index >= this.length()){
             throw new IndexOutOfBoundsException();

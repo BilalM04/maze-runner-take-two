@@ -5,6 +5,7 @@ import java.io.IOException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import ca.mcmaster.se2aa4.mazerunner.algorithm.BFS;
 import ca.mcmaster.se2aa4.mazerunner.algorithm.MazeAlgorithm;
 import ca.mcmaster.se2aa4.mazerunner.algorithm.RightHand;
 import ca.mcmaster.se2aa4.mazerunner.configuration.Configuration;
@@ -21,7 +22,7 @@ public class Main {
         Configuration config = Configuration.load(args);
         try {
             Maze maze = new ListMaze(config.MAZE_FILE());
-            MazeAlgorithm rightHand = new RightHand();
+            MazeAlgorithm rightHand = new BFS();
             Verifier pathVerifier = new PathVerifier();
             if (config.PATH_SEQUENCE() != null) {
                 boolean isValid = pathVerifier.verifyPath(maze, config.PATH_SEQUENCE());
