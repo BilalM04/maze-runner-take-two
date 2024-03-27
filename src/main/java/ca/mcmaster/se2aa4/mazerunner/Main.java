@@ -11,6 +11,7 @@ import ca.mcmaster.se2aa4.mazerunner.configuration.Configuration;
 import ca.mcmaster.se2aa4.mazerunner.maze.ListMaze;
 import ca.mcmaster.se2aa4.mazerunner.maze.Maze;
 import ca.mcmaster.se2aa4.mazerunner.verification.PathVerifier;
+import ca.mcmaster.se2aa4.mazerunner.verification.Verifier;
 
 public class Main {
 
@@ -21,7 +22,7 @@ public class Main {
         try {
             Maze maze = new ListMaze(config.MAZE_FILE());
             MazeAlgorithm right_hand_algo = new RightHand();
-            PathVerifier path_verifier = new PathVerifier();
+            Verifier path_verifier = new PathVerifier();
             if (config.PATH_SEQUENCE() != null) {
                 boolean is_valid = path_verifier.verifyPath(maze, config.PATH_SEQUENCE());
                 if (is_valid) {
