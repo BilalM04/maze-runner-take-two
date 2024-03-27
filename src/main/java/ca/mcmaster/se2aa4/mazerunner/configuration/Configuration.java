@@ -1,4 +1,4 @@
-package ca.mcmaster.se2aa4.mazerunner;
+package ca.mcmaster.se2aa4.mazerunner.configuration;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -10,6 +10,9 @@ import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
+
+import ca.mcmaster.se2aa4.mazerunner.path.Instruction;
+import ca.mcmaster.se2aa4.mazerunner.path.Path;
 
 public record Configuration(String MAZE_FILE, Path PATH_SEQUENCE, int MAZE_WIDTH, int MAZE_HEIGHT) {
 

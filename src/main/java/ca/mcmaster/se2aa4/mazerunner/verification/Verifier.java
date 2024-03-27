@@ -1,6 +1,16 @@
-package ca.mcmaster.se2aa4.mazerunner;
+package ca.mcmaster.se2aa4.mazerunner.verification;
 
 import java.io.IOException;
+
+import ca.mcmaster.se2aa4.mazerunner.configuration.Configuration;
+import ca.mcmaster.se2aa4.mazerunner.explorer.Explorer;
+import ca.mcmaster.se2aa4.mazerunner.explorer.MazeExplorer;
+import ca.mcmaster.se2aa4.mazerunner.maze.ArrayMaze;
+import ca.mcmaster.se2aa4.mazerunner.maze.Maze;
+import ca.mcmaster.se2aa4.mazerunner.path.Instruction;
+import ca.mcmaster.se2aa4.mazerunner.path.Path;
+import ca.mcmaster.se2aa4.mazerunner.position.Direction;
+import ca.mcmaster.se2aa4.mazerunner.position.Location;
 
 public class Verifier {
     private Maze maze;

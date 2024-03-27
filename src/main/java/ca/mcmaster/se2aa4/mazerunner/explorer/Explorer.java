@@ -1,4 +1,6 @@
-package ca.mcmaster.se2aa4.mazerunner;
+package ca.mcmaster.se2aa4.mazerunner.explorer;
+
+import ca.mcmaster.se2aa4.mazerunner.position.Location;
 
 public interface Explorer {
 

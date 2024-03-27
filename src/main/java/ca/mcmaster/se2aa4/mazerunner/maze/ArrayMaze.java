@@ -1,4 +1,4 @@
-package ca.mcmaster.se2aa4.mazerunner;
+package ca.mcmaster.se2aa4.mazerunner.maze;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -6,6 +6,10 @@ import java.io.IOException;
 import java.io.Reader;
 import java.util.HashMap;
 import java.util.Map;
+
+import ca.mcmaster.se2aa4.mazerunner.configuration.Configuration;
+import ca.mcmaster.se2aa4.mazerunner.position.Direction;
+import ca.mcmaster.se2aa4.mazerunner.position.Location;
 
 public class ArrayMaze implements Maze {
     private Tile[][] grid;

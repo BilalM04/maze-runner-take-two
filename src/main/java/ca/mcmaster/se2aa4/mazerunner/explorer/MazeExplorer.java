@@ -1,5 +1,10 @@
-package ca.mcmaster.se2aa4.mazerunner;
+package ca.mcmaster.se2aa4.mazerunner.explorer;
 import java.util.Map;
+
+import ca.mcmaster.se2aa4.mazerunner.maze.Maze;
+import ca.mcmaster.se2aa4.mazerunner.maze.Tile;
+import ca.mcmaster.se2aa4.mazerunner.position.Direction;
+import ca.mcmaster.se2aa4.mazerunner.position.Location;
 
 public class MazeExplorer implements Explorer {
     private Maze maze;
