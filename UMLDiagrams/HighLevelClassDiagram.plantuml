@@ -1,0 +1,109 @@
+@startuml MainConcepts
+!define MyTheme
+skinparam class {
+    BackgroundColor #LightYellow
+    BorderColor #000000
+    FontColor #000000
+}
+
+skinparam stereotypeCBackgroundColor #LightYellow
+skinparam stereotypeCBorderColor #000000
+skinparam stereotypeCFontColor #000000
+
+class Main
+
+package algorithm {
+    interface MazeAlgorithm {
+        ' + getPath(factorized: boolean): String
+    }
+
+    class RightHand
+
+    class DFS
+}
+
+package configuration {
+    class Configuration
+}
+
+package explorer {
+    interface Explorer {
+        ' + goRight(): boolean
+        ' + goLeft(): boolean
+        ' + goForward(): boolean
+        ' + goRight(): void
+        ' + goLeft(): void 
+        ' + isAt(loc: Location): boolean
+    }
+
+    class MazeExplorer
+}
+
+package maze {
+    interface Maze {
+        ' + getNeighbours(loc: Location): Map<Direction, Tile>
+
+    }
+
+    class ArrayMaze
+
+    enum Tile {
+        EMPTY, WALL
+    }
+}
+
+package path {
+    enum Instruction {
+        F, L, R
+    }
+
+    class Path
+
+    class PathBuilder
+}
+
+package position {
+    enum Direction {
+        NORTH, EAST
+        SOUTH, WEST
+    }
+
+    class Location
+}
+
+package verification {
+    interface Verifier
+
+    Class PathVerifier
+}
+
+' Main *--up> Maze
+Main *--left> MazeAlgorithm
+Main *--up> Verifier
+
+Maze <|..up ArrayMaze
+ArrayMaze o--up> Tile
+
+DFS ..down|> MazeAlgorithm
+RightHand ..down|> MazeAlgorithm
+
+' Main --> Path
+Main --right> Configuration
+
+Configuration --up> PathBuilder
+
+MazeExplorer --up> Location
+Location --up> Direction
+
+RightHand --up> Explorer
+DFS --up> Explorer
+
+MazeExplorer ..right|> Explorer
+
+Path --right> Instruction
+
+PathVerifier ..|> Verifier
+
+MazeExplorer --up> Maze
+
+@enduml

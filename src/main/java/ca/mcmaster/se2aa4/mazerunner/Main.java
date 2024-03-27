@@ -8,7 +8,7 @@ import org.apache.logging.log4j.Logger;
 import ca.mcmaster.se2aa4.mazerunner.algorithm.MazeAlgorithm;
 import ca.mcmaster.se2aa4.mazerunner.algorithm.RightHand;
 import ca.mcmaster.se2aa4.mazerunner.configuration.Configuration;
-import ca.mcmaster.se2aa4.mazerunner.verification.Verifier;
+import ca.mcmaster.se2aa4.mazerunner.verification.PathVerifier;
 
 public class Main {
 
@@ -18,7 +18,7 @@ public class Main {
         Configuration config = Configuration.load(args);
         try {
             MazeAlgorithm right_hand_algo = new RightHand(config);
-            Verifier path_verifier = new Verifier(config);
+            PathVerifier path_verifier = new PathVerifier(config);
             if (config.PATH_SEQUENCE() != null) {
                 boolean is_valid = path_verifier.verifyPath(config.PATH_SEQUENCE());
                 if (is_valid) {

@@ -11,7 +11,7 @@ import ca.mcmaster.se2aa4.mazerunner.configuration.Configuration;
 import ca.mcmaster.se2aa4.mazerunner.position.Direction;
 import ca.mcmaster.se2aa4.mazerunner.position.Location;
 
-public class ArrayMaze implements Maze {
+public class ListMaze implements Maze {
     private Tile[][] grid;
     private Configuration config;
 
@@ -24,7 +24,7 @@ public class ArrayMaze implements Maze {
      * @throws IOException If an I/O error occurs while reading the maze file.
      * @throws IllegalArgumentException If an invalid character is encountered in the maze file.
      */
-    public ArrayMaze (Configuration config) throws IOException {
+    public ListMaze (Configuration config) throws IOException {
         this.config = config;
         Reader file_reader = new FileReader(config.MAZE_FILE());
         BufferedReader buffered_reader = new BufferedReader(file_reader);
