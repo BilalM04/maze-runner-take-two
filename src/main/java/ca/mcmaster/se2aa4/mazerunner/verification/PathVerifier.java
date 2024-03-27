@@ -2,7 +2,6 @@ package ca.mcmaster.se2aa4.mazerunner.verification;
 
 import java.io.IOException;
 
-import ca.mcmaster.se2aa4.mazerunner.configuration.Configuration;
 import ca.mcmaster.se2aa4.mazerunner.explorer.Explorer;
 import ca.mcmaster.se2aa4.mazerunner.explorer.MazeExplorer;
 import ca.mcmaster.se2aa4.mazerunner.maze.ListMaze;
@@ -15,8 +14,8 @@ import ca.mcmaster.se2aa4.mazerunner.position.Location;
 public class PathVerifier implements Verifier{
     private Maze maze;
 
-    public PathVerifier(Configuration config) throws IOException {
-        maze = new ListMaze(config);
+    public PathVerifier(String filePath) throws IOException {
+        maze = new ListMaze(filePath);
     }
 
     public boolean verifyPath(Path path){

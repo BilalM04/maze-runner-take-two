@@ -9,13 +9,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import ca.mcmaster.se2aa4.mazerunner.configuration.Configuration;
 import ca.mcmaster.se2aa4.mazerunner.position.Direction;
 import ca.mcmaster.se2aa4.mazerunner.position.Location;
 
 public class ListMaze implements Maze {
     private final List<List<Tile>> grid;
-    private Configuration config;
     private final int width;
     private final int height;
 
@@ -28,11 +26,10 @@ public class ListMaze implements Maze {
      * @throws IOException If an I/O error occurs while reading the maze file.
      * @throws IllegalArgumentException If an invalid character is encountered in the maze file.
      */
-    public ListMaze (Configuration config) throws IOException {
-        this.config = config;
+    public ListMaze (String filePath) throws IOException {
         this.grid = new ArrayList<>();
-        
-        Reader file_reader = new FileReader(config.MAZE_FILE());
+
+        Reader file_reader = new FileReader(filePath);
         BufferedReader buffered_reader = new BufferedReader(file_reader);
 
         String maze_row = buffered_reader.readLine();
@@ -106,7 +103,7 @@ public class ListMaze implements Maze {
             neighbours.put(Direction.NORTH, grid.get(row - 1).get(col));
         }
 
-        if (row + 1 >= config.MAZE_HEIGHT()) {
+        if (row + 1 >= height) {
             neighbours.put(Direction.SOUTH, null);
         } else {
             neighbours.put(Direction.SOUTH, grid.get(row + 1).get(col));
@@ -118,7 +115,7 @@ public class ListMaze implements Maze {
             neighbours.put(Direction.WEST, grid.get(row ).get(col - 1));
         }
 
-        if (col + 1 >= config.MAZE_WIDTH()) {
+        if (col + 1 >= width) {
             neighbours.put(Direction.EAST, null);
         } else {
             neighbours.put(Direction.EAST, grid.get(row).get(col + 1));
@@ -151,7 +148,7 @@ public class ListMaze implements Maze {
     public Location findEastEntry() {
         for (int row = 0; row < height; row++) {
             if (grid.get(row).get(width - 1) == Tile.EMPTY) {
-                return new Location(row, config.MAZE_WIDTH() - 1, Direction.EAST);
+                return new Location(row, width - 1, Direction.EAST);
             }
         }
         throw new IllegalStateException("No East entry point found in the maze");

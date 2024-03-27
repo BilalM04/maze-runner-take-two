@@ -2,7 +2,6 @@ package ca.mcmaster.se2aa4.mazerunner.algorithm;
 
 import java.io.IOException;
 
-import ca.mcmaster.se2aa4.mazerunner.configuration.Configuration;
 import ca.mcmaster.se2aa4.mazerunner.explorer.Explorer;
 import ca.mcmaster.se2aa4.mazerunner.explorer.MazeExplorer;
 import ca.mcmaster.se2aa4.mazerunner.maze.ListMaze;
@@ -15,8 +14,8 @@ import ca.mcmaster.se2aa4.mazerunner.position.Location;
 public class RightHand implements MazeAlgorithm{
     private Maze maze;
 
-    public RightHand(Configuration config) throws IOException {
-        this.maze = new ListMaze(config);
+    public RightHand(String filePath) throws IOException {
+        this.maze = new ListMaze(filePath);
     }
 
     /**
