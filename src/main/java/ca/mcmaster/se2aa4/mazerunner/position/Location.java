@@ -47,6 +47,21 @@ public class Location {
         return this.direction.getOppositeDirection(); // calls method from enum to retreive the relative opposite direction
     }
 
+    public Location getAdjacentLocation(Direction dir) {
+        switch(dir) {
+            case Direction.NORTH:
+                return new Location(row - 1, column, dir);
+            case Direction.EAST:
+                return new Location(row, column + 1, dir);
+            case Direction.SOUTH:
+                return new Location(row + 1, column, dir);
+            case Direction.WEST:
+                return new Location(row, column - 1, dir);
+            default:
+                throw new IllegalStateException();
+        }
+    }
+
     @Override
     public int hashCode() {
         final int prime = 31;

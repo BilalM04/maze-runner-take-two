@@ -50,7 +50,7 @@ public class BFS implements MazeAlgorithm {
 
             for (Entry<Direction, Tile> entry : neighbours.entrySet()) {
                 if (entry.getValue() == Tile.EMPTY) {
-                    Location neighbour = getLocation(current, entry.getKey());
+                    Location neighbour = current.getAdjacentLocation(entry.getKey());
                     if (!parentIndex.containsKey(neighbour)) {
                         queue.add(neighbour);
                         parentIndex.put(neighbour, current);
@@ -75,27 +75,17 @@ public class BFS implements MazeAlgorithm {
             current = parentIndex.get(current);
         }
 
+        int count = 0;
+
         stack.add(start);
         while (!stack.isEmpty()) {
             path.appendPath(pathIndex.get(stack.pop()));
+            count++;
         }
+
+        System.out.println(count);
 
         return path;
-    }
-
-    private Location getLocation(Location loc, Direction dir) {
-        switch(dir) {
-            case Direction.NORTH:
-                return new Location(loc.getRow() - 1, loc.getColumn(), dir);
-            case Direction.EAST:
-                return new Location(loc.getRow(), loc.getColumn() + 1, dir);
-            case Direction.SOUTH:
-                return new Location(loc.getRow() + 1, loc.getColumn(), dir);
-            case Direction.WEST:
-                return new Location(loc.getRow(), loc.getColumn() - 1, dir);
-            default:
-                throw new IllegalStateException();
-        }
     }
 
     private Path getInstructions(Location start, Location end) {
