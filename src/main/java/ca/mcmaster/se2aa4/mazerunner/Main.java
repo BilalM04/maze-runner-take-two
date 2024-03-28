@@ -9,6 +9,7 @@ import ca.mcmaster.se2aa4.mazerunner.algorithm.BFS;
 import ca.mcmaster.se2aa4.mazerunner.algorithm.MazeAlgorithm;
 import ca.mcmaster.se2aa4.mazerunner.algorithm.RightHand;
 import ca.mcmaster.se2aa4.mazerunner.configuration.Configuration;
+import ca.mcmaster.se2aa4.mazerunner.configuration.Method;
 import ca.mcmaster.se2aa4.mazerunner.maze.ListMaze;
 import ca.mcmaster.se2aa4.mazerunner.maze.Maze;
 import ca.mcmaster.se2aa4.mazerunner.verification.PathVerifier;
@@ -22,9 +23,8 @@ public class Main {
         Configuration config = Configuration.load(args);
         try {
             Maze maze = new ListMaze(config.MAZE_FILE());
-            MazeAlgorithm rightHand = new BFS();
-            Verifier pathVerifier = new PathVerifier();
             if (config.PATH_SEQUENCE() != null) {
+                Verifier pathVerifier = new PathVerifier();
                 boolean isValid = pathVerifier.verifyPath(maze, config.PATH_SEQUENCE());
                 if (isValid) {
                     System.out.println("correct path");
@@ -32,7 +32,13 @@ public class Main {
                     System.out.println("incorrect path");
                 }
             } else {
-                String mazePath = rightHand.getPath(maze, true);
+                MazeAlgorithm algo;
+                if (config.METHOD() == Method.RIGHTHAND) {
+                    algo = new RightHand();
+                } else {
+                    algo = new BFS();
+                }
+                String mazePath = algo.getPath(maze, true);
                 System.out.println(mazePath);
             }
         } catch(RuntimeException | IOException e) {
