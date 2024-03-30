@@ -96,7 +96,7 @@ MazeExplorer --up> Location
 Location --up> Direction
 
 RightHand --up> Explorer
-BFS --up> Explorer
+' BFS --up> Explorer
 
 MazeExplorer ..right|> Explorer
 
