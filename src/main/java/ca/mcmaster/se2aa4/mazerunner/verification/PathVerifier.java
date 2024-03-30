@@ -9,25 +9,32 @@ import ca.mcmaster.se2aa4.mazerunner.position.Direction;
 import ca.mcmaster.se2aa4.mazerunner.position.Location;
 
 public class PathVerifier implements Verifier {
+    private Maze maze;
+    private Path path;
 
-    public boolean verifyPath(Maze maze, Path path){
-        return checkWestToEast(maze, path) || checkEastToWest(maze, path);
+    public PathVerifier(Maze maze, Path path) {
+        this.maze = maze;
+        this.path = path;
     }
 
-    private boolean checkWestToEast(Maze maze, Path path) {
+    public boolean verify(){
+        return checkWestToEast() || checkEastToWest();
+    }
+
+    private boolean checkWestToEast() {
         Location start = maze.findWestEntry();
         start.setDirection(Direction.EAST);
         Location end = maze.findEastEntry();
         end.setDirection(Direction.EAST);
-        return traverseMaze(maze, path, start, end);
+        return traverseMaze(start, end);
     }
 
-    private boolean checkEastToWest(Maze maze, Path path) {
+    private boolean checkEastToWest() {
         Location start = maze.findEastEntry();
         start.setDirection(Direction.WEST);
         Location end = maze.findWestEntry();
         end.setDirection(Direction.WEST);
-        return traverseMaze(maze, path, start, end);
+        return traverseMaze(start, end);
     }
 
     /**
@@ -40,7 +47,7 @@ public class PathVerifier implements Verifier {
      * @return True if the explorer successfully traverses the maze according to the path and reaches the end, false otherwise.
      * @throws IllegalStateException If an invalid instruction is encountered in the path.
      */
-    private boolean traverseMaze(Maze maze, Path path, Location start, Location end) {
+    private boolean traverseMaze(Location start, Location end) {
         Explorer mazeExplorer = new MazeExplorer(maze, start);
         boolean isValidInstruction;
 

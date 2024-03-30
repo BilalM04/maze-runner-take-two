@@ -9,7 +9,7 @@ import ca.mcmaster.se2aa4.mazerunner.configuration.Method;
 import ca.mcmaster.se2aa4.mazerunner.maze.ListMaze;
 import ca.mcmaster.se2aa4.mazerunner.maze.Maze;
 
-public class AlgoBenchmark implements Benchmark {
+public class AlgorithmBenchmark implements Benchmark {
     private Method method;
     private Method baseline;
     private String file;
@@ -23,7 +23,7 @@ public class AlgoBenchmark implements Benchmark {
     private String methodPath;
     private String baselinePath;
 
-    public AlgoBenchmark(Method method, Method baseline, String file) {
+    public AlgorithmBenchmark(Method method, Method baseline, String file) {
         this.method = method;
         this.baseline = baseline;
         this.file = file;
