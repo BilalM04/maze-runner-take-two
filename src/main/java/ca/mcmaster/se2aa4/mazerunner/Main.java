@@ -26,6 +26,8 @@ public class Main {
         try {
             if (config.BASELINE() != null) {
                 Benchmark benchmark = new AlgoBenchmark(config.METHOD(), config.BASELINE(), config.MAZE_FILE());
+                benchmark.runBenchmark();
+                System.out.println(benchmark.generateReport());
             } else {
                 Maze maze = new ListMaze(config.MAZE_FILE());
                 if (config.PATH_SEQUENCE() != null) {
