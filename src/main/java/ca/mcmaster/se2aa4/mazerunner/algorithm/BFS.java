@@ -75,15 +75,10 @@ public class BFS implements MazeAlgorithm {
             current = parentIndex.get(current);
         }
 
-        int count = 0;
-
         stack.add(start);
         while (!stack.isEmpty()) {
             path.appendPath(pathIndex.get(stack.pop()));
-            count++;
         }
-
-        System.out.println(count);
 
         return path;
     }

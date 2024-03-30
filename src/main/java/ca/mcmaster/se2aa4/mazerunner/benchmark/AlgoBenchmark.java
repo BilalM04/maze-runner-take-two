@@ -3,8 +3,8 @@ package ca.mcmaster.se2aa4.mazerunner.benchmark;
 import ca.mcmaster.se2aa4.mazerunner.configuration.Method;
 
 public class AlgoBenchmark implements Benchmark {
-    Method method;
-    Method baseline;
+    private Method method;
+    private Method baseline;
 
     public AlgoBenchmark(Method method, Method baseline, String file) {
 
