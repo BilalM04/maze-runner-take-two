@@ -78,10 +78,10 @@ public class AlgorithmBenchmark implements Benchmark {
         switch (method) {
             case Method.RIGHTHAND:
                 MazeAlgorithm righthand = new RightHand();
-                return righthand.getPath(maze, false);
+                return righthand.getPath(maze, false).replace(" ", "");
             case Method.BFS:
                 MazeAlgorithm bfs = new BFS(maze);
-                return bfs.getPath(maze, false);
+                return bfs.getPath(maze, false).replace(" ", "");
             default:
                 throw new IllegalArgumentException();
         }

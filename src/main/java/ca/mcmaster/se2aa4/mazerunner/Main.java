@@ -2,9 +2,6 @@ package ca.mcmaster.se2aa4.mazerunner;
 
 import java.io.IOException;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import ca.mcmaster.se2aa4.mazerunner.algorithm.BFS;
 import ca.mcmaster.se2aa4.mazerunner.algorithm.MazeAlgorithm;
 import ca.mcmaster.se2aa4.mazerunner.algorithm.RightHand;
@@ -18,8 +15,6 @@ import ca.mcmaster.se2aa4.mazerunner.verification.PathVerifier;
 import ca.mcmaster.se2aa4.mazerunner.verification.Verifier;
 
 public class Main {
-
-    private static final Logger logger = LogManager.getLogger();
 
     public static void main(String[] args) {
         Configuration config = Configuration.load(args);
