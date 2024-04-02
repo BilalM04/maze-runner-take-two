@@ -42,9 +42,9 @@ public class AlgorithmBenchmark implements Benchmark {
     
     public String generateReport() {
         StringBuilder builder = new StringBuilder();
-        builder.append("Time spent loading the maze: ").append(String.format("%.2f", loadTime)).append("\n");
-        builder.append("Method Time: ").append(String.format("%.2f", methodTime)).append("\n");
-        builder.append("Baseline Time: ").append(String.format("%.2f", baselineTime)).append("\n");
+        builder.append("Time spent loading the maze: ").append(String.format("%.2f", loadTime)).append(" ms\n");
+        builder.append("Method Time: ").append(String.format("%.2f", methodTime)).append(" ms\n");
+        builder.append("Baseline Time: ").append(String.format("%.2f", baselineTime)).append(" ms\n");
         builder.append("Speedup: ").append(String.format("%.2f", speedup));
         return builder.toString();
     }
