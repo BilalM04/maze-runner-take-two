@@ -18,14 +18,19 @@ public class BFS implements MazeAlgorithm {
 
     private Map<Location, Location> parentIndex;
     private Map<Location, Path> pathIndex;
+    private Maze maze;
+
+    public BFS(Maze maze) {
+        this.maze = maze;
+    }
     
-    public String getPath(Maze maze, boolean factorized) {
+    public String getPath(Maze temp, boolean factorized) {
         Location start = maze.findWestEntry();
         start.setDirection(Direction.EAST);
         Location end = maze.findEastEntry();
         end.setDirection(Direction.EAST);
 
-        breadthFirstSearch(maze, start);
+        breadthFirstSearch(start);
         Path path = findPath(start, end);
 
         if (factorized) {
@@ -35,7 +40,7 @@ public class BFS implements MazeAlgorithm {
         }
     }
 
-    private void breadthFirstSearch(Maze maze, Location start) {
+    private void breadthFirstSearch(Location start) {
         parentIndex = new HashMap<>();
         pathIndex = new HashMap<>();
 
@@ -75,15 +80,10 @@ public class BFS implements MazeAlgorithm {
             current = parentIndex.get(current);
         }
 
-        int count = 0;
-
         stack.add(start);
         while (!stack.isEmpty()) {
             path.appendPath(pathIndex.get(stack.pop()));
-            count++;
         }
-
-        System.out.println(count);
 
         return path;
     }

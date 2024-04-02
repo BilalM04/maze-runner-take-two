@@ -2,12 +2,11 @@ package ca.mcmaster.se2aa4.mazerunner;
 
 import java.io.IOException;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import ca.mcmaster.se2aa4.mazerunner.algorithm.BFS;
 import ca.mcmaster.se2aa4.mazerunner.algorithm.MazeAlgorithm;
 import ca.mcmaster.se2aa4.mazerunner.algorithm.RightHand;
+import ca.mcmaster.se2aa4.mazerunner.benchmark.AlgorithmBenchmark;
+import ca.mcmaster.se2aa4.mazerunner.benchmark.Benchmark;
 import ca.mcmaster.se2aa4.mazerunner.configuration.Configuration;
 import ca.mcmaster.se2aa4.mazerunner.configuration.Method;
 import ca.mcmaster.se2aa4.mazerunner.maze.ListMaze;
@@ -17,32 +16,41 @@ import ca.mcmaster.se2aa4.mazerunner.verification.Verifier;
 
 public class Main {
 
-    private static final Logger logger = LogManager.getLogger();
-
     public static void main(String[] args) {
         Configuration config = Configuration.load(args);
         try {
-            Maze maze = new ListMaze(config.MAZE_FILE());
-            if (config.PATH_SEQUENCE() != null) {
-                Verifier pathVerifier = new PathVerifier();
-                boolean isValid = pathVerifier.verifyPath(maze, config.PATH_SEQUENCE());
-                if (isValid) {
-                    System.out.println("correct path");
-                } else {
-                    System.out.println("incorrect path");
-                }
+            if (config.BASELINE() != null) {
+                Benchmark benchmark = new AlgorithmBenchmark(config.METHOD(), config.BASELINE(), config.MAZE_FILE());
+                benchmark.runBenchmark();
+                System.out.println(benchmark.generateReport());
             } else {
-                MazeAlgorithm algo;
-                if (config.METHOD() == Method.RIGHTHAND) {
-                    algo = new RightHand();
+                Maze maze = new ListMaze(config.MAZE_FILE());
+                if (config.PATH_SEQUENCE() != null) {
+                    Verifier pathVerifier = new PathVerifier(maze, config.PATH_SEQUENCE());
+                    if (pathVerifier.verify()) {
+                        System.out.println("correct path");
+                    } else {
+                        System.out.println("incorrect path");
+                    }
                 } else {
-                    algo = new BFS();
+                    System.out.println(solveMaze(config.METHOD(), maze));
                 }
-                String mazePath = algo.getPath(maze, true);
-                System.out.println(mazePath);
             }
         } catch(RuntimeException | IOException e) {
-            System.out.println(e);
+            System.err.println(e);
+        }
+    }
+
+    private static String solveMaze(Method method, Maze maze) {
+        switch (method) {
+            case Method.RIGHTHAND:
+                MazeAlgorithm righthand = new RightHand();
+                return righthand.getPath(maze, true);
+            case Method.BFS:
+                MazeAlgorithm bfs = new BFS(maze);
+                return bfs.getPath(maze, true);
+            default:
+                throw new IllegalArgumentException();
         }
     }
 }

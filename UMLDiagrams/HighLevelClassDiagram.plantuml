@@ -14,7 +14,7 @@ class Main
 
 package algorithm {
     interface MazeAlgorithm {
-        ' + getPath(factorized: boolean): String
+        + getPath(factorized: boolean)
     }
 
     class RightHand
@@ -24,16 +24,27 @@ package algorithm {
 
 package configuration {
     class Configuration
+
+    enum Method {
+        RIGHTHAND, BFS
+    }
+}
+
+package benchmark {
+    class AlgorithmBenchmark
+
+    interface Benchmark {
+        + runBenchmark()
+        + generateReport()
+    }
 }
 
 package explorer {
     interface Explorer {
-        ' + goRight(): boolean
-        ' + goLeft(): boolean
-        ' + goForward(): boolean
-        ' + goRight(): void
-        ' + goLeft(): void 
-        ' + isAt(loc: Location): boolean
+        + goRight()
+        + goLeft()
+        + goForward()
+        + goBackward()
     }
 
     class MazeExplorer
@@ -41,11 +52,14 @@ package explorer {
 
 package maze {
     interface Maze {
-        ' + getNeighbours(loc: Location): Map<Direction, Tile>
+        + getNeighbours(loc: Location)
+        + findWestEntry()
+        + findEastEntry()
+        + getTile(loc: Location)
 
     }
 
-    class ArrayMaze
+    class ListMaze
 
     enum Tile {
         EMPTY, WALL
@@ -72,38 +86,50 @@ package position {
 }
 
 package verification {
-    interface Verifier
+    interface Verifier {
+        + verify()
+    }
 
     Class PathVerifier
 }
 
 ' Main *--up> Maze
-Main *--left> MazeAlgorithm
-Main *--up> Verifier
+Main o--left> MazeAlgorithm
+Main o--up> Verifier
+Main o--> Benchmark
 
-Maze <|..up ArrayMaze
-ArrayMaze o--up> Tile
+Maze <|..up ListMaze
+ListMaze o--up> Tile
 
 BFS ..down|> MazeAlgorithm
 RightHand ..down|> MazeAlgorithm
 
 ' Main --> Path
-Main --right> Configuration
+Main *--> Configuration
 
-Configuration --up> PathBuilder
+Configuration o--up> PathBuilder
 
 MazeExplorer --up> Location
 Location --up> Direction
 
 RightHand --up> Explorer
-BFS --up> Explorer
+BFS --up> Maze
 
-MazeExplorer ..right|> Explorer
+MazeExplorer ..down|> Explorer
 
-Path --right> Instruction
+Path --left> Instruction
 
 PathVerifier ..|> Verifier
+PathVerifier o--> Maze
+PathVerifier o--> Path
+
+AlgorithmBenchmark ..|> Benchmark
 
 MazeExplorer --up> Maze
+
+Configuration --down> Method
+
+AlgorithmBenchmark --up> Method
+AlgorithmBenchmark --right> Maze
 
 @enduml
