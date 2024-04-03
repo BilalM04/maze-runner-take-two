@@ -47,7 +47,7 @@ public class Main {
                 MazeAlgorithm righthand = new RightHand();
                 return righthand.getPath(maze, true);
             case Method.BFS:
-                MazeAlgorithm bfs = new BFS(maze);
+                MazeAlgorithm bfs = new BFS();
                 return bfs.getPath(maze, true);
             default:
                 throw new IllegalArgumentException();
