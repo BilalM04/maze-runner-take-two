@@ -2,7 +2,7 @@
 
     participant Main
     participant Configuration
-    participant Maze
+    ' participant Maze
     participant Benchmark
     participant Verifier
     participant MazeAlgorithm
