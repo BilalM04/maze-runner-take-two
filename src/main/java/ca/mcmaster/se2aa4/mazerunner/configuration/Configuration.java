@@ -33,7 +33,7 @@ public record Configuration(String MAZE_FILE, Path PATH_SEQUENCE, Method METHOD,
             CommandLine cmd = parser.parse(options, args);
             String file = cmd.getOptionValue("i");
             Path path = null;
-            Method method = Method.BFS;
+            Method method = Method.RIGHTHAND;
             Method baseline = null;
             
             if (cmd.hasOption("p")) {
