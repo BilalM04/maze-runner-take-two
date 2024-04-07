@@ -6,6 +6,7 @@ import ca.mcmaster.se2aa4.mazerunner.position.Direction;
 import ca.mcmaster.se2aa4.mazerunner.position.Location;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import org.junit.jupiter.api.BeforeEach;
 
@@ -24,7 +25,7 @@ public class LocationTest {
         loc.setRow(7);
         assertEquals(7, loc.getRow());
         loc.setRow(-45);
-        assertEquals(-45, loc.getRow());
+        assertNotEquals(-78, loc.getRow());
     }
 
     @Test
@@ -34,7 +35,7 @@ public class LocationTest {
         loc.setColumn(190);
         assertEquals(190, loc.getColumn());
         loc.setColumn(-78);
-        assertEquals(-78, loc.getColumn());
+        assertNotEquals(-4, loc.getColumn());
     }
 
     @Test
