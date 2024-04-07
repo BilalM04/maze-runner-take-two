@@ -21,18 +21,32 @@ public class LocationTest {
     public void rowTest() {
         loc.setRow(98);
         assertEquals(98, loc.getRow());
+        loc.setRow(7);
+        assertEquals(7, loc.getRow());
+        loc.setRow(-45);
+        assertEquals(-45, loc.getRow());
     }
 
     @Test
     public void columnTest() {
         loc.setColumn(14);
         assertEquals(14, loc.getColumn());
+        loc.setColumn(190);
+        assertEquals(190, loc.getColumn());
+        loc.setColumn(-78);
+        assertEquals(-78, loc.getColumn());
     }
 
     @Test
     public void directionTest() {
         loc.setDirection(Direction.SOUTH);
         assertEquals(Direction.SOUTH, loc.getDirection());
+        loc.setDirection(Direction.EAST);
+        assertEquals(Direction.EAST, loc.getDirection());
+        loc.setDirection(Direction.WEST);
+        assertEquals(Direction.WEST, loc.getDirection());
+        loc.setDirection(Direction.NORTH);
+        assertEquals(Direction.NORTH, loc.getDirection());
     }
 
     @Test
