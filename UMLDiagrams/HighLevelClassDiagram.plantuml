@@ -102,35 +102,36 @@ package verification {
 Main *--left> MazeAlgorithm
 Main *--up> Verifier
 Main *--down> Benchmark
+Main *--up> Maze
 
 Maze <|..up ListMaze
-ListMaze *--up> Tile
+ListMaze --up> Tile
 
 BFS ..down|> MazeAlgorithm
 RightHand ..down|> MazeAlgorithm
 
 Main *--> Configuration
 
-Configuration o--up> PathBuilder
+Configuration ..up> PathBuilder
 
 MazeExplorer *--up> Location
-Location *--up> Direction
+Location --up> Direction
 
-RightHand *--up> Explorer
-BFS --up> Maze
+RightHand ..up> Explorer
+BFS ..up> Maze
 
 MazeExplorer ..down|> Explorer
 
-Path *--left> Instruction
+Path --left> Instruction
 
 PathVerifier ..|> Verifier
-PathVerifier --> Maze
+PathVerifier o--> Maze
 PathVerifier o--> Path
 
 AlgorithmBenchmark ..|> Benchmark
-AlgorithmBenchmark *--> MazeAlgorithm
+AlgorithmBenchmark ..> MazeAlgorithm
 
-MazeExplorer --up> Maze
+MazeExplorer o--up> Maze
 
 Configuration --down> Method
 

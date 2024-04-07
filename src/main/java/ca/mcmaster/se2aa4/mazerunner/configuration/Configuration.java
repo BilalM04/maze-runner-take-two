@@ -20,7 +20,6 @@ public record Configuration(String MAZE_FILE, Path PATH_SEQUENCE, Method METHOD,
      * @throws RuntimeException If an error occurs during parsing or loading file.
      */
     public static Configuration load(String[] args) {
-        PathBuilder builder = new PathBuilder();
         Options options = new Options();
         CommandLineParser parser = new DefaultParser();
 
@@ -38,6 +37,7 @@ public record Configuration(String MAZE_FILE, Path PATH_SEQUENCE, Method METHOD,
             
             if (cmd.hasOption("p")) {
                 String stringPath = cmd.getOptionValue("p");
+                PathBuilder builder = new PathBuilder();
                 path = builder.buildPath(stringPath);
             }
 
