@@ -42,12 +42,12 @@ public record Configuration(String MAZE_FILE, Path PATH_SEQUENCE, Method METHOD,
             }
 
             if (cmd.hasOption("b")) {
-                String baselineInput = cmd.getOptionValue("b");
+                String baselineInput = cmd.getOptionValue("b").toLowerCase();
                 baseline = toMethod(baselineInput);
             }
 
             if (cmd.hasOption("m")) {
-                String methodInput = cmd.getOptionValue("m");
+                String methodInput = cmd.getOptionValue("m").toLowerCase();
                 method = toMethod(methodInput);
             }
 

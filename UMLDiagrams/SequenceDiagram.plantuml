@@ -2,7 +2,7 @@
 
     participant Main
     participant Configuration
-    ' participant Maze
+    participant Maze
     participant Benchmark
     participant Verifier
     participant MazeAlgorithm
@@ -21,11 +21,15 @@
     |||
     else Verification Mode
     |||
+    Main -> Maze ++: new Maze()
+    Main <-- Maze --: return maze
     Main -> Verifier ++: verify()
     Main <-- Verifier --: return result
     |||
     else Solve Mode
     |||
+    Main -> Maze ++: new Maze()
+    Main <-- Maze --: return maze
     Main -> MazeAlgorithm ++: getPath(maze: Maze, factorized: boolean)
     Main <-- MazeAlgorithm --: return path
     |||
