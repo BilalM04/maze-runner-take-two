@@ -71,7 +71,7 @@ public class AlgorithmBenchmark implements Benchmark {
     }
 
     private void measureSpeedup() {
-        this.speedup = (double)(baselinePath.length() * 1.0 / methodPath.length());
+        this.speedup = (baselinePath.length() * 1.0 / methodPath.length());
     }
 
     private String solveMaze(Method method) {
