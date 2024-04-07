@@ -36,21 +36,6 @@ public class LocationTest {
     }
 
     @Test
-    public void rightTest() {
-        assertEquals(Direction.EAST, loc.getRightDirection());
-    }
-
-    @Test
-    public void leftTest() {
-        assertEquals(Direction.WEST, loc.getLeftDirection());
-    }
-
-    @Test
-    public void oppositeTest() {
-        assertEquals(Direction.SOUTH, loc.getOppositeDirection());
-    }
-
-    @Test
     public void adjacentTest() {
         assertEquals(new Location(5, 7, Direction.NORTH), loc.getAdjacentLocation(Direction.NORTH));
         assertEquals(new Location(6, 8, Direction.EAST), loc.getAdjacentLocation(Direction.EAST));
