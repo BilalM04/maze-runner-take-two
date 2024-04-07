@@ -16,7 +16,7 @@ import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 
 public class ListMazeTest {
-    Maze maze;
+    private Maze maze;
 
     @BeforeEach
     public void setUp() throws IOException {
