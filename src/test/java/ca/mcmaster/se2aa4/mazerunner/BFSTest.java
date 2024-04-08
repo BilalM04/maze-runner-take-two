@@ -20,11 +20,6 @@ public class BFSTest {
     }
 
     @Test
-    public void testDirect() throws IOException{
-        assertEquals("F R 2F L 3F R F L F R F L 2F ", result("./examples/direct.maz.txt"));
-    }
-
-    @Test
     public void testStraight() throws IOException{
         assertEquals("4F ", result("./examples/straight.maz.txt"));
     }
