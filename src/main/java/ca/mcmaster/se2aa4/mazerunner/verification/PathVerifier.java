@@ -17,6 +17,7 @@ public class PathVerifier implements Verifier {
         this.path = path;
     }
 
+    @Override
     public boolean verify(){
         return checkWestToEast() || checkEastToWest();
     }

@@ -19,6 +19,7 @@ public class RightHand implements MazeAlgorithm {
      * @param maze Maze Object
      * @return A string representation of the found path.
      */
+    @Override
     public String getPath(Maze maze, boolean factorized) {
         Location start = maze.findWestEntry();
         start.setDirection(Direction.EAST);

@@ -28,6 +28,7 @@ public class BFS implements MazeAlgorithm {
      * @param maze Maze object
      * @return A string representation of the found path.
      */
+    @Override
     public String getPath(Maze maze, boolean factorized) {
         Location start = maze.findWestEntry();
         start.setDirection(Direction.EAST);

@@ -68,6 +68,7 @@ public class ListMaze implements Maze {
      * @return The tile at the specified location.
      * @throws IllegalArgumentException If the location is outside the bounds of the maze grid.
      */
+    @Override
     public Tile getTile(Location loc) {
         if (loc.getRow() < 0 || loc.getRow() >= height || loc.getColumn() < 0 || loc.getColumn() >= width) {
             throw new IllegalArgumentException();
@@ -84,6 +85,7 @@ public class ListMaze implements Maze {
      * @return A map of directions to tiles representing the neighboring tiles.
      * @throws IndexOutOfBoundsException If the specified location is outside the bounds of the maze grid.
      */
+    @Override
     public Map<Direction, Tile> getNeighbours(Location loc) {
         Map<Direction, Tile> neighbours = new HashMap<>();
         int row = loc.getRow();
@@ -126,6 +128,7 @@ public class ListMaze implements Maze {
      * @return The location of the west entry point.
      * @throws IllegalStateException If no west entry point is found in the maze.
      */
+    @Override
     public Location findWestEntry() {
         for (int row = 0; row < height; row++) {
             if (grid.get(row).get(0) == Tile.EMPTY) {
@@ -141,6 +144,7 @@ public class ListMaze implements Maze {
      * @return The location of the east entry point.
      * @throws IllegalStateException If no east entry point is found in the maze.
      */
+    @Override
     public Location findEastEntry() {
         for (int row = 0; row < height; row++) {
             if (grid.get(row).get(width - 1) == Tile.EMPTY) {
@@ -150,10 +154,12 @@ public class ListMaze implements Maze {
         throw new IllegalStateException("No East entry point found in the maze");
     }
 
+    @Override
     public int width() {
         return this.width;
     }
 
+    @Override
     public int height() {
         return this.height;
     }
