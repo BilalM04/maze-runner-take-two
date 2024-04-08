@@ -32,7 +32,7 @@ public class MazeExplorer implements Explorer {
      */
     public boolean goRight() {
         Map<Direction, Tile> neighbours = maze.getNeighbours(loc);
-        Direction right = this.loc.getRightDirection();
+        Direction right = this.loc.getDirection().getRightDirection();
 
         if (neighbours.get(right) == Tile.EMPTY) {
             this.loc.setDirection(right);
@@ -50,7 +50,7 @@ public class MazeExplorer implements Explorer {
      */
     public boolean goLeft() {
         Map<Direction, Tile> neighbours = maze.getNeighbours(loc);
-        Direction left = this.loc.getLeftDirection();
+        Direction left = this.loc.getDirection().getLeftDirection();
 
         if (neighbours.get(left) == Tile.EMPTY) {
             this.loc.setDirection(left);
@@ -86,7 +86,7 @@ public class MazeExplorer implements Explorer {
      */
     public boolean goBackward() {
         Map<Direction, Tile> neighbours = maze.getNeighbours(loc);
-        Direction back = this.loc.getOppositeDirection();
+        Direction back = this.loc.getDirection().getOppositeDirection();
 
         if (neighbours.get(back) == Tile.EMPTY) {
             this.loc.setDirection(back);
@@ -98,11 +98,11 @@ public class MazeExplorer implements Explorer {
     }
 
     public void turnLeft() {
-        this.loc.setDirection(this.loc.getLeftDirection());
+        this.loc.setDirection(this.loc.getDirection().getLeftDirection());
     }
 
     public void turnRight() {
-        this.loc.setDirection(this.loc.getRightDirection());
+        this.loc.setDirection(this.loc.getDirection().getRightDirection());
     }
 
     public boolean isAt(Location loc) {

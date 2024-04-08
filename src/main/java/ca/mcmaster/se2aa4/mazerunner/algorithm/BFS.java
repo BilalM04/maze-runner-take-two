@@ -86,9 +86,9 @@ public class BFS implements MazeAlgorithm {
     private Path getInstructions(Location start, Location end) {
         Path path = new Path();
 
-        if (start.getLeftDirection() == end.getDirection()) {
+        if (start.getDirection().getLeftDirection() == end.getDirection()) {
             path.addInstruction(Instruction.L);
-        } else if (start.getRightDirection() == end.getDirection()) {
+        } else if (start.getDirection().getRightDirection() == end.getDirection()) {
             path.addInstruction(Instruction.R);
         } 
 
