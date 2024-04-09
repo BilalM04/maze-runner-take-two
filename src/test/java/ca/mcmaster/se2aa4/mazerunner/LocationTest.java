@@ -61,6 +61,10 @@ public class LocationTest {
     @Test
     public void equalsTest() {
         assertEquals(new Location(6, 7, Direction.NORTH), loc);
+        assertEquals(new Location(6, 7, Direction.WEST), loc);
+        assertNotEquals(new Location(2, 7, Direction.NORTH), loc);
+        assertNotEquals(new Location(6, 9, Direction.NORTH), loc);
+        assertNotEquals(new Location(8, 12, Direction.NORTH), loc);
     }
     
 }

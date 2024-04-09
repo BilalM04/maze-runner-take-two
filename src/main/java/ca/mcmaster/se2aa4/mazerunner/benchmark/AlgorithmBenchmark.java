@@ -29,6 +29,7 @@ public class AlgorithmBenchmark implements Benchmark {
         this.file = file;
     }
 
+    @Override
     public void runBenchmark(){
         try {
             measureLoadTime();
@@ -40,6 +41,7 @@ public class AlgorithmBenchmark implements Benchmark {
         }
     }
     
+    @Override
     public String generateReport() {
         StringBuilder builder = new StringBuilder();
         builder.append("Time spent loading the maze: ").append(String.format("%.2f", loadTime)).append(" ms\n");

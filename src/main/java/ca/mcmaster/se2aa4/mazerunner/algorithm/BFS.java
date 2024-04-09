@@ -18,7 +18,17 @@ public class BFS implements MazeAlgorithm {
 
     private Map<Location, Location> parentIndex;
     private Map<Location, Path> pathIndex;
-    
+
+    /**
+     * Retrieves the path from the west entry point to the east entry point in the maze 
+     * using a BFS algorithm.
+     *
+     * @param factorized If true, the returned path is factorized.
+     *                   If false, the returned path is canonical.
+     * @param maze Maze object
+     * @return A string representation of the found path.
+     */
+    @Override
     public String getPath(Maze maze, boolean factorized) {
         Location start = maze.findWestEntry();
         start.setDirection(Direction.EAST);
@@ -35,6 +45,13 @@ public class BFS implements MazeAlgorithm {
         }
     }
 
+    /**
+     * Performs a BFS from the start location and populates the parent and path index.
+     * Inspiration from 2C03 textbook: Algorithms 4th Edition by Robert Sedgewick, Kevin Wayne
+     *
+     * @param start Start location in the maze
+     * @param maze Maze object
+     */
     private void breadthFirstSearch(Maze maze, Location start) {
         parentIndex = new HashMap<>();
         pathIndex = new HashMap<>();
@@ -61,6 +78,14 @@ public class BFS implements MazeAlgorithm {
         }
     }
 
+    /**
+     * Constructs the shortest path from the parent and path index.
+     * Inspiration from 2C03 textbook: Algorithms 4th Edition by Robert Sedgewick, Kevin Wayne
+     *
+     * @param start Start location in the maze
+     * @param end End Location in the maze
+     * @return A Path object representing the shortest path.
+     */
     private Path findPath(Location start, Location end) {
         Path path = new Path();
         Stack<Location> stack = new Stack<>();
@@ -83,6 +108,14 @@ public class BFS implements MazeAlgorithm {
         return path;
     }
 
+    /**
+     * Given two adjacent Location objects, finds the series of instructions
+     * from the start to the end.
+     *
+     * @param start Start location in the maze
+     * @param end End Location in the maze
+     * @return A Path object representing the path from start to end.
+     */
     private Path getInstructions(Location start, Location end) {
         Path path = new Path();
 

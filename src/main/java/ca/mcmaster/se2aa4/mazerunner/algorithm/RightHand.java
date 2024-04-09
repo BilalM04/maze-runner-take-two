@@ -11,12 +11,15 @@ import ca.mcmaster.se2aa4.mazerunner.position.Location;
 public class RightHand implements MazeAlgorithm {
 
     /**
-     * Retrieves the path from the west entry point to the east entry point in the maze.
+     * Retrieves the path from the west entry point to the east entry point in the maze 
+     * using the righthand method.
      *
      * @param factorized If true, the returned path is factorized.
      *                   If false, the returned path is canonical.
+     * @param maze Maze Object
      * @return A string representation of the found path.
      */
+    @Override
     public String getPath(Maze maze, boolean factorized) {
         Location start = maze.findWestEntry();
         start.setDirection(Direction.EAST);

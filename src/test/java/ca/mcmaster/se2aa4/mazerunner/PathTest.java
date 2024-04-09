@@ -34,7 +34,12 @@ public class PathTest {
 
     @Test
     public void getInstructionTest(){
+        assertEquals(Instruction.F, path.getInstruction(0));
+        assertEquals(Instruction.F, path.getInstruction(1));
         assertEquals(Instruction.R, path.getInstruction(2));
+        assertEquals(Instruction.L, path.getInstruction(3));
+        assertEquals(Instruction.L, path.getInstruction(4));
+        assertEquals(Instruction.F, path.getInstruction(5));
     }
 
     @Test

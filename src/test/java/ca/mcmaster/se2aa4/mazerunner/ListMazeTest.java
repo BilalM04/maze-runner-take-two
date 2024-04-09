@@ -43,21 +43,25 @@ public class ListMazeTest {
     @Test
     public void testWestEntry() {
         assertEquals(new Location(8, 0, Direction.EAST), maze.findWestEntry());
+        assertNotEquals(new Location(7, 0, Direction.EAST), maze.findWestEntry());
     }
 
     @Test
     public void testEastEntry() {
         assertEquals(new Location(5, 10, Direction.EAST), maze.findEastEntry());
+        assertNotEquals(new Location(8, 10, Direction.EAST), maze.findEastEntry());
     }
 
     @Test
     public void testWidth() {
         assertEquals(11, maze.width());
+        assertNotEquals(10, maze.width());
     }
 
     @Test
     public void testHeight() {
         assertEquals(11, maze.height());
+        assertNotEquals(12, maze.height());
     }
     
 
