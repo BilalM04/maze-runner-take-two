@@ -33,7 +33,7 @@ This program explores a maze, finding a path from an entry point to an exit one.
 To build the program, simply package it with Maven:
 
 ```
-mosser@azrael % mvn -q clean package 
+bilal@mohd % mvn -q clean package 
 ```
 
 #### Command line arguments
@@ -48,35 +48,35 @@ mosser@azrael % mvn -q clean package
 When no logs are activated, the programs only print the computed path on the standard output.
 
 ```
-mosser@azrael % java -jar target/mazerunner.jar -i ./examples/straight.maz.txt -m righthand
+bilal@mohd % java -jar target/mazerunner.jar -i ./examples/straight.maz.txt -m righthand
 4F
-mosser@azrael %
+bilal@mohd %
 ```
 
 If a given path is correct, the program prints the message `correct path` on the standard output.
 
 ```
-mosser@azrael % java -jar target/mazerunner.jar -i ./examples/straight.maz.txt -p 4F
+bilal@mohd % java -jar target/mazerunner.jar -i ./examples/straight.maz.txt -p 4F
 correct path
-mosser@azrael %
+bilal@mohd %
 ```
 
 If a given path is incorrect, the program prints the message `incorrect path` on the standard output.
 
 ```
-mosser@azrael % java -jar target/mazerunner.jar -i ./examples/straight.maz.txt -p 3F
+bilal@mohd % java -jar target/mazerunner.jar -i ./examples/straight.maz.txt -p 3F
 inccorrect path
-mosser@azrael %
+bilal@mohd %
 ```
 
 If a baseline is specified, the program prints the benchmark results on the standard output.
 
 ```
-mosser@azrael % java -jar target/mazerunner.jar -i ./examples/huge.maz.txt -m bfs -b righthand
+bilal@mohd % java -jar target/mazerunner.jar -i ./examples/huge.maz.txt -m bfs -b righthand
 Time spent loading the maze: 2.86 ms
 Method Time: 9.80 ms
 Baseline Time: 6.46 ms
 Speedup: 35.87
-mosser@azrael %
+bilal@mohd %
 ```
 
