@@ -58,7 +58,7 @@ If a given path is correct, the program prints the message `correct path` on the
 ```
 mosser@azrael % java -jar target/mazerunner.jar -i ./examples/straight.maz.txt -p 4F
 correct path
-mosser@azrael A1-Template %
+mosser@azrael %
 ```
 
 If a given path is incorrect, the program prints the message `incorrect path` on the standard output.
