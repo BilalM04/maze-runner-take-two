@@ -1,5 +1,4 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/8jM7fhXE)
-# Assignment A1 - Maze Runner
+# Assignment A3 - Maze Runner, Take Two
 
   * **Student**: [Mohammad Bilal](bilalm14@mcmaster.ca)
   * **Program**: B. Eng. In Software Engineering
@@ -24,9 +23,10 @@ This program explores a maze, finding a path from an entry point to an exit one.
 - A canonical path contains only `F`, `R` and `L` symbols
 - A factorized path squashes together similar instructions (i.e., `FFF` = `3F`, `LL` = `2L`).
 - Spaces are ignored in the instruction sequence (only for readability: `FFLFF` = `FF L FF`)
-- The program takes as input a maze and print the path on the standard output.
-    - For this assignment, the path does not have to be the shortest one.
+- The program takes as input a maze and prints the path on the standard output.
+    - There are two maze algorithms available: BFS and Right Hand Rule
 - The program can take a path as input and verify if it's a legit one.
+- The program can benchmark and compare the efficiency of two algorithms.
 
 ## How to run this software?
 
@@ -36,61 +36,19 @@ To build the program, simply package it with Maven:
 mosser@azrael A1-Template % mvn -q clean package 
 ```
 
-### Provided version (starter code)
-
-The starter code assumes the maze file name is the first argument. 
-
-```
-mosser@azrael A1-Template % java -jar target/mazerunner.jar ./examples/small.maz.txt
-** Starting Maze Runner
-**** Reading the maze from file ./examples/small.maz.txt
-WALL WALL WALL WALL WALL WALL WALL WALL WALL WALL WALL 
-WALL PASS PASS PASS PASS PASS PASS PASS PASS PASS WALL 
-WALL WALL WALL PASS WALL WALL WALL PASS WALL WALL WALL 
-WALL PASS PASS PASS PASS PASS WALL PASS PASS PASS WALL 
-WALL PASS WALL PASS WALL WALL WALL WALL WALL PASS WALL 
-WALL PASS WALL PASS PASS PASS PASS PASS WALL PASS PASS 
-WALL WALL WALL PASS WALL PASS WALL WALL WALL WALL WALL 
-WALL PASS PASS PASS WALL PASS PASS PASS PASS PASS WALL 
-PASS PASS WALL PASS WALL PASS WALL WALL WALL PASS WALL 
-WALL PASS WALL PASS WALL PASS WALL PASS PASS PASS WALL 
-WALL WALL WALL WALL WALL WALL WALL WALL WALL WALL WALL 
-**** Computing path
-PATH NOT COMPUTED
-** End of MazeRunner
-```
-
-When called on a non-existing file. it prints an error message
-
-```
-mosser@azrael A1-Template % java -jar target/mazerunner.jar ./examples/small.maz.txtd
-** Starting Maze Runner
-**** Reading the maze from file ./examples/small.maz.txtd
-/!\ An error has occured /!\
-**** Computing path
-PATH NOT COMPUTED
-** End of MazeRunner
-```
-
-### Delivered version
-
 #### Command line arguments
-
-The delivered program at the end of this assignment should use the following flags:
 
 - `-i MAZE_FILE`: specifies the filename to be used;
 - `-p PATH_SEQUENCE`: activates the path verification mode to validate that PATH_SEQUENCE is correct for the maze
-
-If you are also delivering the bonus, your program will react to a third flag:
-
-- `-method {tremaux, righthand}`: specifies which path computation method to use. (default is right hand)
+- `-m {righthand, bfs}`: specifies which path computation method to use. (default is right hand)
+- `-b {righthand, bfs}`: activates the benchmark mode and specifies which path computation method to use as the baseline.
 
 #### Examples
 
 When no logs are activated, the programs only print the computed path on the standard output.
 
 ```
-mosser@azrael A1-Template % java -jar target/mazerunner.jar -i ./examples/straight.maz.txt
+mosser@azrael A1-Template % java -jar target/mazerunner.jar -i ./examples/straight.maz.txt -m righthand
 4F
 mosser@azrael A1-Template %
 ```
@@ -108,6 +66,17 @@ If a given path is incorrect, the program prints the message `incorrect path` on
 ```
 mosser@azrael A1-Template % java -jar target/mazerunner.jar -i ./examples/straight.maz.txt -p 3F
 inccorrect path
+mosser@azrael A1-Template %
+```
+
+If a baseline is specified, the program prints the benchmark results on the standard output.
+
+```
+mosser@azrael A1-Template % java -jar target/mazerunner.jar -i ./examples/huge.maz.txt -m bfs -b righthand
+Time spent loading the maze: 2.86 ms
+Method Time: 9.80 ms
+Baseline Time: 6.46 ms
+Speedup: 35.87
 mosser@azrael A1-Template %
 ```
 
