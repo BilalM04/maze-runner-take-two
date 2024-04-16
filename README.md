@@ -1,4 +1,4 @@
-# Assignment A3 - Maze Runner, Take Two
+# Maze Runner, Take Two
 
   * **Student**: [Mohammad Bilal](bilalm14@mcmaster.ca)
   * **Program**: B. Eng. In Software Engineering
